@@ -3,7 +3,7 @@ function moveFeature1() {
 }
 
 function moveFeature1Report1() {
-	location.href = "report1.html";
+	location.href = "report1.php";
 }
 
 function moveFeature2() {

@@ -92,6 +92,12 @@ body {
   flex-direction: column;
 }
 
+.login_container{  
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+}
+
 .feature1 {
   width: 162px;
   color: rgba(0,0,0,1);
@@ -387,3 +393,54 @@ body {
   background: black; 
   color: white;  
 } */
+
+.userIcon{
+  width: 70px;
+  height: 70px;
+  background: url("../images/user.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.login{
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
+
+.userID{
+  color: black;
+  border: 1px solid black;
+  border-radius: 25px;
+  color: black;
+  background-color: white;
+  width: 10rem; 
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.userPW{
+  color: black;
+  border: 1px solid black;
+  border-radius: 25px;
+  color: black;
+  background-color: white;
+  width: 10rem; 
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.loginButton {
+  border: 1px solid black;
+  border-radius: 25px;
+  font-size: 1rem;
+  text-align: center;
+  color: white; 
+  background-color: black;
+  border-radius: 15px;
+  cursor: pointer;
+  padding: 0.5rem;
+}

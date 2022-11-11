@@ -12,17 +12,20 @@
                 <span class="title">2022 Korea Box Office Report</span>
             </section>
             <section class="features">
+                <form method="post" action="../php/signup.php"> 
                 <div class= "login_container">
                     <div class="userIcon"></div>
                     <span class="login">SIGN UP</span>
                     <!--ID 입력-->
-                    <input class="userID" type="text" placeholder="ID">
+                    <input class="userID" name = "id" type="text" placeholder="ID">
                      <!--PW 입력-->
-                    <input class="userPW" type="text" placeholder="Password">
-                    <button class="loginButton" type="button" onclick='login()'>
+                    <input class="userPW" name= "pw" type="text" placeholder="Password">
+                    <button class="loginButton" type="submit">
                         SUBMIT
                     </button>
                 </div>
+            </form>
+
             </section>
         </div>
     </body>

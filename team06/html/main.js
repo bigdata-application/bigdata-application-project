@@ -29,3 +29,11 @@ function moveRangeList() {
 function moveRangeAndNationList() {
 	document.location.href = "./movieListByRangeAndNation.php";
 }
+
+function moveGenreList() {
+	document.location.href = "./movieListByGenre.php";
+}
+
+function moveGenreAndNationList() {
+	document.location.href = "./movieListByGenreAndNation.php";
+}

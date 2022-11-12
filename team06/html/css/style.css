@@ -444,3 +444,135 @@ body {
   cursor: pointer;
   padding: 0.5rem;
 }
+
+/*
+.selectBox{
+    position: relative;
+    width: 200px; 
+    border: 1px solid #999; 
+    z-index: 1; 
+    display: flex; 
+    flex-direction: row; 
+    align-content: center;
+}
+
+.selectbox:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  width: 0;
+  height: 0;
+  margin-top: -1px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #333;
+}
+
+.selectbox label {
+  position: absolute;
+  top: 1px; 
+  left: 5px; 
+  padding: .8em .5em;  
+  color: #999;
+  z-index: -1; 
+}
+
+.selectbox select {
+  width: 100%;
+  height: auto; 
+  line-height: normal; 
+  font-family: inherit;  
+  padding: .8em .5em;  
+  border: 0;
+  opacity: 0;  
+  filter:alpha(opacity=0);  
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
+} */
+
+
+/**/
+
+.selectBox{
+  margin-top: 2rem;
+  display: flex; 
+  flex-direction: row; 
+  align-content: center;
+  justify-content: center;
+}
+
+.rangeSelect{
+  border: 1px solid black;
+  align-self: center;
+  width: 200px; 
+  height: 30px;
+  margin-right: 2px;
+}
+
+.selectButton{
+  height: 30px;
+  border: 1px solid black;
+  font-size: 1rem;
+  text-align: center;
+  color: white;
+  background-color: black;
+  /*border-radius: 70%; */
+  cursor: pointer;
+}
+
+.movieInfoBox{
+  margin-top: 3rem;
+  display: flex; 
+  flex-direction: row; 
+  align-content: center;
+  justify-content: center;
+}
+
+.poster{
+  border: 1px solid black;
+  height: 200px;
+  width: 150px; 
+}
+
+.info{
+  border: 1px solid black;
+  height: 200px;
+  width: 150px; 
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.boldTitle{
+  font-size: 20px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.infoText{
+  position: relative;
+  left: 1rem;
+}
+
+.nationSelect{
+  border: 1px solid black;
+  align-self: center;
+  width: 200px; 
+  height: 30px;
+  margin-right: 2px;
+}
+
+.audienceIcon2 {
+  cursor: pointer;
+  width: 70px;
+  height: 70px;
+  background: url("../images/v84_22.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  overflow: hidden;
+  position:relative;
+  left: 19%; 
+}

@@ -3,7 +3,7 @@
     <head>
         <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
         <link href="./css/style.css" rel="stylesheet" />
-        <script type="text/javascript" src="./main.js"></script>
+        <script type="text/javascript" src="./main.js">var flag=0;</script>
         <title>Document</title>
     </head>
     <body>
@@ -16,10 +16,12 @@
                     <!--댓글 출력-->
 
                     <?php //db로부터 댓글 가져오기
+                        session_start();
                         $mysqli= mysqli_connect("localhost", "team06", "", "team06");
                         $sql= "select * from audience_ranking_by_day_comment order by id desc;";//id 내림차순으로 최신순으로 정렬
                         $result=mysqli_query($mysqli,$sql);
                         while ($rowData= $result->fetch_array()) {
+                            $id=$rowData['id'];
                             $user_idx=$rowData['user_idx'];
                             $sql2= "select * from user where user_idx=$user_idx";
                             $result2=mysqli_query($mysqli,$sql2);
@@ -27,10 +29,27 @@
                                 $user_name= $rowData2['user_name'];
                             }
                             $content= $rowData['content'];
+
+                            if($_SESSION['user_idx']==$user_idx) {
                             echo "<div>&nbsp;&nbsp;&nbsp;&nbsp;$user_name</div>
                             <div class='commentOutput'> 
                                 <span>$content</span>
-                            </div>";
+                                    <form action='../php/audiencenumbydaycommentdelete.php' method='post' style='display: inline;'>
+                                <button class='commentButton' type='submit' style='color: #FF92B1;' name='delete' value=$id> x </button>
+                                    </form>
+                                <button class='commentButton' type='button' style='color: #C8FAC8;' style='display: inline;'> modify </button>
+                                </div>
+                               
+                            ";
+                        }
+                        else {
+                            echo "<div>&nbsp;&nbsp;&nbsp;&nbsp;$user_name</div>
+                            <div class='commentOutput'> 
+                                <span>$content</span>
+                               </div>
+                            
+                            ";
+                        }
                         }
                     ?>
 
@@ -121,9 +140,13 @@
                     </div>     
                 
             </section>
+
+        
             <div class="commentInputForm">
                 <div class="commentInputForm2">
                     <!--댓글 입력-->
+                          
+
                     <div>+comment&nbsp;&nbsp;&nbsp;&nbsp;</div>
                         <form action= "../php/audiencenumbydaycomment.php" METHOD= "post">
                     <div class="commentInput"> 
@@ -131,7 +154,7 @@
                     </div>
                     <!--댓글 입력 제출 버튼-->
                     <div>
-                        <button class="commentButton" type="submit"> > </button>
+                        <button class="commentButton" type="submit"> > </script> </button> 
                     </div>
                         </form>
                 </div>

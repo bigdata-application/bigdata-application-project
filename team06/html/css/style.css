@@ -563,6 +563,14 @@ body {
   margin-right: 2px;
 }
 
+.genreSelect{
+  border: 1px solid black;
+  align-self: center;
+  width: 200px; 
+  height: 30px;
+  margin-right: 2px;
+}
+
 .audienceIcon2 {
   cursor: pointer;
   width: 70px;
@@ -575,4 +583,53 @@ body {
   overflow: hidden;
   position:relative;
   left: 19%; 
+}
+
+.audienceFeature {
+  width: 162px;
+  color: rgba(0,0,0,1);
+  font-family: Inter;
+  font-weight: Regular;
+  font-size: 20px;
+  opacity: 1;
+  text-align: center;
+}
+
+.audienceIcon {
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  background: url("../images/v84_22.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  overflow: hidden;
+  position:relative;
+  left: 19%; 
+}
+
+.genreFeature {
+  width: 162px;
+  color: rgba(0,0,0,1);
+  font-family: Inter;
+  font-weight: Regular;
+  font-size: 20px;
+  opacity: 1;
+  text-align: center;
+}
+
+.genreIcon {
+  cursor: pointer;
+  width: 74px;
+  height: 74px;
+  background: url("../images/v84_27.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  overflow: hidden;
+  position:relative;
+  left: 19%;
+  bottom: 10%;
 }

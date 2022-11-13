@@ -12,6 +12,7 @@
         $passGenre = $_SESSION['genreValue'];
         //$rangeOption = $_POST['passRange'];
         $nationOption = $_POST['genreNation'];
+        $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
     ?>
         <div class = "container">
             <section class="middleBanner">
@@ -20,15 +21,36 @@
             <div class="commentOutputForm">
                 <div class="commentOutputForm2">
                     <!--댓글 출력-->
-                    <div>&nbsp;&nbsp;&nbsp;&nbsp;username1</div>
-                    <div class="commentOutput"> 
-                        <span>comment output from database</span>
-                    </div>
-                    <!--댓글 출력 (하드코딩)-->
-                    <div>&nbsp;&nbsp;&nbsp;&nbsp;username2</div>
-                    <div class="commentOutput"> 
-                        <span>very interesting</span>
-                    </div>
+                    <?php 
+                        
+                        $sql= "select * 
+                        from GENRE_RANKING_BY_NATION_COMMENT
+                        order by id desc;";
+
+                        $res=mysqli_query($mysqli,$sql);
+
+                        while ($rowData= $res->fetch_array()) {
+                            $id=$rowData['id'];
+                            $user_idx=$rowData['user_idx'];
+                            $content= $rowData['content'];
+
+                            $sql2= "select * from user where user_idx=$user_idx";
+                            $res2=mysqli_query($mysqli,$sql2);
+                            while ($rowData2= $res2->fetch_array()) {
+                                $user_name= $rowData2['user_name'];
+                            }
+
+                            echo "<div>&nbsp;&nbsp;&nbsp;&nbsp;$user_name</div>
+                            <div class='commentOutput'> 
+                                <span>$content</span>
+                               </div>
+                            
+                            ";
+                        }
+    
+                    ?>
+
+                   
                 </div>
             </div>
             <section class="features">
@@ -45,13 +67,31 @@
                     <div class="poster">
 
                     </div>
-                    <div class="info">
-                        <p class="boldTitle">(관객수) </p>
-                        <p class="infoText">title: </p>
-                        <p class="infoText">nation: </p>
-                        <p class="infoText">genre: </p>
-                        <p class="infoText"> profit: </p>
-                    </div>
+                    <?php
+                        
+                        $sql = "select * from mv_info where genre='".$_SESSION['genreValue']."' and nation='".$_POST['genreNation']."' order by audience desc;";
+                        $res = mysqli_query($mysqli,$sql);
+                        
+                        while ($movieArray = mysqli_fetch_array($res,MYSQLI_ASSOC)) {
+                            $audience = $movieArray['audience'];
+                            // $movie_name_eng = $movieArray['movie_name_En'];
+                            $movie_name_kor = $movieArray['movie_name_kor'];
+                            $nation = $movieArray['nation'];
+                            $earned_money = $movieArray['earned_money'];
+
+                            echo "<div class='info'>
+                                <p class='boldTitle'>(관객수) $audience </p>
+                                <p class='infoText'>title: $movie_name_kor </p>
+                                <p class='infoText'>nation: $nation </p>
+                                <p class='infoText'>genre: $passGenre </p>
+                                <p class='infoText'> profit: $earned_money </p>
+                                </div>";
+                        }
+                        
+
+
+
+                    ?>
                 </div>
             </section>
             <div class="commentInputForm">
@@ -63,7 +103,7 @@
                     </div>
                     <!--댓글 입력 제출 버튼-->
                     <div>
-                        <button class="commentButton" type="button"> > </button>
+                        <button class="commentButton" type="button"> </button>
                     </div>
                 </div>
             </div>

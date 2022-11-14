@@ -37,3 +37,39 @@ function moveGenreList() {
 function moveGenreAndNationList() {
 	document.location.href = "./movieListByGenreAndNation.php";
 }
+
+function vote() {
+	document.location.href = "./vote.php";
+}
+
+function cannotVote() {
+	alert('Login Please!')
+}
+
+
+function voteSubmit() {
+	document.location.href = "./voteResult.php";
+	alert('Voted!')
+}
+
+function voteUpdate() {
+	document.location.href = "./voteResult.php";
+	alert('Vote Update!')
+}
+
+// Javascript
+function clickCheck(target) {
+    document.querySelectorAll(`input[type=checkbox]`)
+        .forEach(el => el.checked = false);
+
+    target.checked = true;
+}
+
+function modifyVote() {
+	document.location.href = "./voteModify.php";
+}
+
+function deleteVote() {
+	alert('Vote Delete!')
+}
+

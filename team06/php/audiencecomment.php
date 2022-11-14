@@ -9,7 +9,7 @@
     else{
     $content= $_POST['comment'];
     $this_user = $_SESSION['user_idx'];
-    $mysqli= mysqli_connect("localhost", "team06", "", "team06");
+    $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
     $sql= 
     "START TRANSACTION;
     insert into audience_comment(user_idx, content) values($this_user, '$content');

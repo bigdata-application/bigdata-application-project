@@ -17,7 +17,7 @@
 
                     <?php //db로부터 댓글 가져오기
                         session_start();
-                        $mysqli= mysqli_connect("localhost", "team06", "", "team06");
+                        $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
                         $sql= "select * from audience_ranking_by_day_comment order by id desc;";//id 내림차순으로 최신순으로 정렬
                         $result=mysqli_query($mysqli,$sql);
                         while ($rowData= $result->fetch_array()) {
@@ -37,8 +37,15 @@
                                     <form action='../php/audiencenumbydaycommentdelete.php' method='post' style='display: inline;'>
                                 <button class='commentButton' type='submit' style='color: #FF92B1;' name='delete' value=$id> x </button>
                                     </form>
-                                <button class='commentButton' type='button' style='color: #C8FAC8;' style='display: inline;'> modify </button>
-                                </div>
+                            <br>
+                                    <form action= '../php/audiencenumbydaycommentmodify.php' method= 'post' style='display: inline;' >
+                                <div class='commentInput' style='margin-left: -8px; padding: -8px;'> 
+                                    <input class='input' name= 'modify' type='text' placeholder='enter comment'>
+                                </div>          
+                                    <input type='hidden' name='id' value=$id>                      
+                                <button class='commentButton' type='submit' style='color: #C8FAC8;' style='display: inline;'> modify </button>
+                                    </form>
+                            </div>
                                
                             ";
                         }
@@ -76,7 +83,7 @@
                         
                                 <!--php 출력 코드 나오는 부분 (하드코딩 상태)-->
                         <?php
-                            $mysqli= mysqli_connect("localhost", "team06", "", "team06");
+                            $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
 
                             $sql= "select * , rank() over (order by audience_num desc) as rnk from audience_num_by_day where nation= '한국' ;";
                             
@@ -100,7 +107,7 @@
                         
                                 <!--php 출력 코드 나오는 부분 (하드코딩 상태)-->
                         <?php
-                            $mysqli= mysqli_connect("localhost", "team06", "", "team06");
+                            $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
 
                             $sql= "select * , rank() over (order by audience_num desc) as rnk from audience_num_by_day where nation= '외국' ;";
                             
@@ -123,7 +130,7 @@
                         
                                 <!--php 출력 코드 나오는 부분 (하드코딩 상태)-->
                         <?php
-                            $mysqli= mysqli_connect("localhost", "team06", "", "team06");
+                            $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
 
                             $sql= "select totalrank.day, totalrank.total, rank() over (order by totalrank.total desc) from 
                             (select day, sum(audience_num)total from audience_num_by_day group by day) totalrank;";

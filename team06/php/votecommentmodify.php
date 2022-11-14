@@ -15,7 +15,7 @@ $sql=
 $result = mysqli_multi_query($mysqli, $sql);
 
 
-echo "<script> document.location.href='../html/movieListByGenre.php'; </script>";
+echo "<script> document.location.href='../html/voteResult.php'; </script>";
 
 
 ?>

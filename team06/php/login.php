@@ -4,7 +4,7 @@
 $id=$_POST['id'];//사용자가 입력한 id form
 $pw = $_POST['pw']; // 사용자가 입력한 pw form
 
-$mysqli= mysqli_connect("localhost", "team06", "", "team06");
+$mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
 
 $sql= "select * from user where user_name='".$id."';";
 

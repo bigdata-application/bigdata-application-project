@@ -20,17 +20,8 @@
             </section>
             <div class="commentOutputForm">
                 <div class="commentOutputForm2">
-                    <!--댓글 출력-->
-                    <!-- <div>&nbsp;&nbsp;&nbsp;&nbsp;username1</div>
-                    <div class="commentOutput"> 
-                        <span>comment output from database</span>
-                    </div> -->
-                    <!--댓글 출력 (하드코딩)-->
-                    <!-- <div>&nbsp;&nbsp;&nbsp;&nbsp;username2</div>
-                    <div class="commentOutput"> 
-                        <span>very interesting</span>
-                    </div> -->
-                    <?php
+                    <!-- 댓글 출력 -->
+                    <?php //db로부터 댓글 가져오기
                         session_start();
                         $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
                         $sql = "select * from audience_range_comment order by id desc;";
@@ -40,7 +31,7 @@
                             $user_idx=$rowData['user_idx'];
                             $sql2= "select * from user where user_idx=$user_idx";
                             $result2=mysqli_query($mysqli,$sql2);
-                            while ($rowData2= $result2->fetch_array()) {//username추출
+                            while ($rowData2= $result2->fetch_array()) {
                                 $user_name= $rowData2['user_name'];
                             }
                             $content= $rowData['content'];
@@ -49,13 +40,21 @@
                             echo "<div>&nbsp;&nbsp;&nbsp;&nbsp;$user_name</div>
                             <div class='commentOutput'> 
                                 <span>$content</span>
-                                    <form action='../php/rankbynumcomment.php' method='post' style='display: inline;'>
+                                    <form action='../php/rankbynumcommentdelete.php' method='post' style='display: inline;'>
                                 <button class='commentButton' type='submit' style='color: #FF92B1;' name='delete' value=$id> x </button>
                                     </form>
-                                <button class='commentButton' type='button' style='color: #C8FAC8;' style='display: inline;'> modify </button>
+                            <br>
+                                    <form action= '../php/rankbynumcommentmodify.php' method= 'post' style='display: inline;' >
+                                <div class='commentInput' style='margin-left: -8px; padding: -8px;'> 
+                                    <input class='input' name= 'modify' type='text' placeholder='enter comment'>
                                 </div>
-                               
-                            ";}
+                                    <input type='hidden' name='id' value=$id>                      
+                                <button class='commentButton' type='submit' style='color: #C8FAC8;' style='display: inline;'> modify </button>
+                                    </form>
+                            </div>
+                              
+                            ";
+                        }
                         else {
                             echo "<div>&nbsp;&nbsp;&nbsp;&nbsp;$user_name</div>
                             <div class='commentOutput'> 
@@ -63,6 +62,7 @@
                                </div>";
                         }
                     }
+                
                     ?>
                 </div>
             </div>
@@ -98,18 +98,6 @@
                         <input type = "hidden" value="<?php echo $_POST['audRange']; ?>" name = "passRange">
                     </form>
 
-                <!-- <div class="movieInfoBox"> -->
-                    <!-- <div class="poster">
-
-                    </div> -->
-                    <!-- <div class="info">
-                        <p class="boldTitle">(관객수) </p>
-                        <p class="infoText">title: </p>
-                        <p class="infoText">nation: </p>
-                        <p class="infoText">genre: </p>
-                        <p class="infoText"> profit: </p>
-                    </div> -->
-                    <!-- <div class = "info"> -->
                     <?php
                         $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
 
@@ -125,8 +113,6 @@
 
                           $sql = "SELECT audience, movie_name_kor, nation, genre, earned_money 
                               from mv_info where $condition order by audience desc";
-                              //audience, movie_name_kor, nation, genre, earned_money
-                              //order by audience desc
                               $res = mysqli_query($mysqli, $sql);
                               
                               if($res){
@@ -167,15 +153,18 @@
             </section>
             <div class="commentInputForm">
                 <div class="commentInputForm2">
+
                     <!--댓글 입력-->
                     <div>+comment&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                    <form action= "../php/rankbynumcomment.php" METHOD= "post">
                     <div class="commentInput"> 
-                        <input class="input" type="text" placeholder="enter comment">
+                        <input class="input" name = "comment" type="text" placeholder="enter comment">
                     </div>
                     <!--댓글 입력 제출 버튼-->
                     <div>
-                        <button class="commentButton" type="button"> > </button>
+                        <button class="commentButton" type="submit"> > </button>
                     </div>
+                        </form>
                 </div>
             </div>
         </div> 

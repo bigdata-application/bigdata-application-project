@@ -14,15 +14,55 @@
             <div class="commentOutputForm">
                 <div class="commentOutputForm2">
                     <!--댓글 출력-->
-                    <div>&nbsp;&nbsp;&nbsp;&nbsp;username1</div>
-                    <div class="commentOutput"> 
-                        <span>comment output from database</span>
-                    </div>
-                    <!--댓글 출력 (하드코딩)-->
-                    <div>&nbsp;&nbsp;&nbsp;&nbsp;username2</div>
-                    <div class="commentOutput"> 
-                        <span>very interesting</span>
-                    </div>
+
+                    <?php 
+                        session_start();
+                        $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
+                        $sql= "select * from prefer_food_ranking_comment order by id desc;";
+                        $res=mysqli_query($mysqli,$sql);
+                        while ($rowData= $res->fetch_array()) {
+                            $id=$rowData['id'];
+                            $user_idx=$rowData['user_idx'];
+                            $sql2= "select * from user where user_idx=$user_idx";
+                            $res2=mysqli_query($mysqli,$sql2);
+                            while ($rowData2= $res2->fetch_array()) {
+                                $user_name= $rowData2['user_name'];
+                            }
+                            $content= $rowData['content'];
+
+
+                            // 해당 댓글의 작성자인 경우 수정과 삭제 기능 표시
+                            if($_SESSION['user_idx']==$user_idx) {
+                                echo "<div>&nbsp;&nbsp;&nbsp;&nbsp;$user_name</div>
+                                <div class='commentOutput'> 
+                                    <span>$content</span>  
+                                        <form action='../php/votecommentdelete.php' method='post' style='display: inline;'>
+                                            <button class='commentButton' type='submit' style='color: #FF92B1;' name='delete' value=$id> x </button>
+                                        </form>
+
+                                        <form action='../php/votecommentmodify.php' method='post' style='display: inline;'>
+                                            <div class='commentInput' style='margin-left: -8px; padding: -8px;'> 
+                                                <input class='input' name= 'modify' type='text' placeholder='enter comment'>
+                                            </div>          
+                                            <input type='hidden' name='id' value=$id>
+                                            <button class='commentButton' type='submit' style='color: #C8FAC8;' style='display: inline;'> modify </button>
+                                        </form>
+                                    </div>
+                                   
+                                ";
+                            }
+                            else {
+                                echo "<div>&nbsp;&nbsp;&nbsp;&nbsp;$user_name</div>
+                                <div class='commentOutput'> 
+                                    <span>$content</span>
+                                   </div>
+                                
+                                ";
+                            }
+
+                        }
+                       
+                    ?>
                 </div>
             </div>
            <section class="voteFeature"> 
@@ -72,7 +112,7 @@
                     <?php
                     session_start();
                     if (!$_SESSION['user_name']) {//투표 참여
-                            echo "<button class="voteButton" type="button" onclick='cannotvote()'>
+                            echo "<button class='voteButton' type='button' onclick='cannotvote()'>
                                                 VOTE </button>";
                     } else {
                         $userID = $_SESSION['user_idx'];
@@ -90,12 +130,12 @@
                         if($result === false){ //에러 발생
                                 echo mysqli_error($mysqli);
                         }else if($voted){ //로그인 사용자가 투표에 이미 참여했을 경우
-                                echo "<button class="voteButton" type="button" onclick='modifyVote()'>
+                                echo "<button class='voteButton' type='button' onclick='modifyVote()'>
                                                 MODIFY </button>";
-                                echo "<form action="voteDelete.php" method="post"> <button class="voteButton" type="submit" onclick='deleteVote()'>
+                                echo "<form action='voteDelete.php' method='post'> <button class='voteButton' type='submit' onclick='deleteVote()'>
                                                 DELETE </button> </form>";
                         }else if(!$voted){  //로그인 사용자가 투표에 참여하지 않았을 경우
-                                                echo "<button class="voteButton" type="button" onclick='vote()'>
+                                                echo "<button class='voteButton' type='button' onclick='vote()'>
                                                 VOTE </button>"; 
                         }
                     }
@@ -107,13 +147,17 @@
                     <div class="commentInputForm2">
                         <!--댓글 입력-->
                         <div>+comment&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                        <div class="commentInput"> 
-                            <input class="input" type="text" placeholder="enter comment">
-                        </div>
-                        <!--댓글 입력 제출 버튼-->
-                        <div>
-                            <button class="commentButton" type="button"> > </button>
-                        </div>
+
+                        <form action= "../php/votecomment.php" METHOD= "post">
+                            <div class="commentInput"> 
+                                <input class="input" type="text" placeholder="enter comment">
+                            </div>
+                            <!--댓글 입력 제출 버튼-->
+                            <div>
+                                <button class="commentButton" type="submit" > submit </button>
+                            </div>
+                        </form>
+                        
                     </div>
             </div>
         </div>

@@ -37,12 +37,29 @@
                             }
                             $content= $rowData['content'];
 
-                            echo "<div>&nbsp;&nbsp;&nbsp;&nbsp;$user_name</div>
-                            <div class='commentOutput'> 
-                                <span>$content</span>
-                               </div>
-                            
-                            ";
+
+                            if($_SESSION['user_idx']==$user_idx) {
+
+                                
+                                echo "<div>&nbsp;&nbsp;&nbsp;&nbsp;$user_name</div>
+                                <div class='commentOutput'> 
+                                    <span>$content</span>  
+                                        <form action='../php/genrerankingcommentdelete.php' method='post' style='display: inline;'>
+                                    <button class='commentButton' type='submit' style='color: #FF92B1;' name='delete' value=$id> x </button>
+                                        </form>
+                                    <button class='commentButton' type='button' style='color: #C8FAC8;' style='display: inline;'> modify </button>
+                                    </div>
+                                   
+                                ";
+                            }
+                            else {
+                                echo "<div>&nbsp;&nbsp;&nbsp;&nbsp;$user_name</div>
+                                <div class='commentOutput'> 
+                                    <span>$content</span>
+                                   </div>
+                                
+                                ";
+                            }
 
                         }
                        
@@ -121,7 +138,7 @@
                         </div>
                         <!--댓글 입력 제출 버튼-->
                         <div>
-                            <button class="commentButton" type="submit"> </button>
+                            <button class="commentButton" type="submit">submit </button>
                         </div>
                     </form>
                 </div>

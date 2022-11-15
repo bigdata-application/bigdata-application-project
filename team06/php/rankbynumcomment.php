@@ -17,7 +17,7 @@
         select * from audience_range_comment;
         COMMIT;";
         $result = mysqli_multi_query($mysqli, $sql);
-        echo $sql;
+        //echo $sql;
         echo "<script> document.location.href='../html/movieListByRange.php'; </script>";
 }
 

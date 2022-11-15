@@ -28,11 +28,11 @@ else{
 
     $sql= 
     "START TRANSACTION;
-    insert into genre_ranking_comment(user_idx, genre_id, content) values($this_user, (select genre_id from genre where genre_name='$genreOption'),'".$content."');
-    select * from genre_ranking_comment;
+    insert into GENRE_RANKING_BY_NATION_COMMENT(user_idx, genre_id, content) values($this_user, (select genre_id from genre where genre_name='$genreOption'),'".$content."');
+    select * from GENRE_RANKING_BY_NATION_COMMENT;
     COMMIT;";
 
-    echo $sql;
+    //echo $sql;
 
     $result = mysqli_multi_query($mysqli, $sql);
     

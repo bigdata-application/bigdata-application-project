@@ -37,7 +37,7 @@
                     <!--댓글 출력-->
                     <?php 
                         
-                        $sql= "select * from genre_ranking_by_nation_comment where genre_id= (select genre_id from genre where genre_name='$passGenre') && nation_id=(select nation_id from nation where nation_name='".$_SESSION['genreNation']."') order by id desc;";
+                        $sql= "select * from GENRE_RANKING_BY_NATION_COMMENT where genre_id= (select genre_id from genre where genre_name='$passGenre') && nation_id=(select nation_id from nation where nation_name='".$_SESSION['genreNation']."') order by id desc;";
 
                         $res=mysqli_query($mysqli,$sql);
 

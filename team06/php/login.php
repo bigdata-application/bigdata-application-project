@@ -37,7 +37,7 @@ else{
             //echo "user_pw 값: ".$_SESSION['user_pw']."<br/>";
             //echo session_id()."세션스타트후에 아이디출력<br>";
 
-        echo "<script> document.location.href='../html/index.html'; </script>";
+        echo "<script> document.location.href='../html/index.php'; </script>";
     }
     else {//비밀번호 잘못 입력하면 경고 후 로그인페이지 새로고침
         echo "<script> alert('비밀번호를 다시 입력하세요') 

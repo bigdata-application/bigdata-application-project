@@ -12,20 +12,24 @@
         session_start();
         $passRange = $_SESSION['rangeValue'];
         $rangeOption= $passRange; 
-
         $nationOption = $_POST['nationValue'];
-    
-        
-
     ?>
         <div class = "container">
+            <div class="headerLogin">
+                <?php
+                    if (isset($_SESSION['user_name'])) {//로그인 상태 > 로그아웃 버튼 출력
+                        echo "<button class='headerLoginButton' type='button' onclick='moveLogout()'>LOGOUT</button>";
+                    } else { //로그아웃 상태 > 로그인 버튼 출력
+                        echo "<button class='headerLoginButton' type='button' onclick='moveLogin()'>LOGIN</button>";
+                    }   
+                ?>
+            </div>
             <section class="middleBanner">
                     <span class="title">2022 Korea Box Office Report</span>
             </section>
             <div class="commentOutputForm">
                 <div class="commentOutputForm2">
                 <?php
-                        session_start();
                         $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
                         $sql = "select * from audience_range_nation_comment order by id desc;";
                         $result=mysqli_query($mysqli,$sql);

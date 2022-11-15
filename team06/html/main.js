@@ -1,5 +1,9 @@
+function main() {
+	document.location.href = "./index.php";
+}
+
 function moveFeature1() {
-	document.location.href = "./feature1.html";
+	document.location.href = "./feature1.php";
 }
 
 function moveFeature1Report1() {
@@ -15,11 +19,11 @@ function moveFeature2Report2() {
 }
 
 function moveFeature3() {
-	document.location.href = "./feature3.php";
+	document.location.href = "./voteResult.php";
 }
 
 function login() {
-	document.location.href = "./index.html";
+	document.location.href = "./index.php";
 }
 
 function moveRangeList() {
@@ -46,14 +50,13 @@ function cannotVote() {
 	alert('Login Please!')
 }
 
-
 function voteSubmit() {
-	document.location.href = "./voteResult.php";
-	alert('Voted!')
+	document.location.href = "./voteSave.php"; //voteResult
+	alert('Voted!');
 }
 
 function voteUpdate() {
-	document.location.href = "./voteResult.php";
+	document.location.href = "./voteUpdate.php";
 	alert('Vote Update!')
 }
 
@@ -69,7 +72,18 @@ function modifyVote() {
 	document.location.href = "./voteModify.php";
 }
 
+
 function deleteVote() {
+	document.location.href = "./voteDelete.php";
 	alert('Vote Delete!')
+} 
+
+function moveLogin() {
+	document.location.href = "./login.html";
 }
+
+function moveLogout() {
+	document.location.href = "./logout.php";
+}
+
 

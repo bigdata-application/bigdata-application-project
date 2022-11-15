@@ -33,8 +33,8 @@
                     <br/>
                     <label><input type="checkbox" name="snack" value="5" onclick="clickCheck(this)"> squid</label>
                     <br/>
-                    <button class="voteSubmitButton" type="submit" onclick='voteUpdate()'>
-                        SUBMIT
+                    <button class="voteSubmitButton" type="submit">
+                        MODIFY
                     </button>
                 </form>
             </div>

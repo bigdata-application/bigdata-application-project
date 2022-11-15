@@ -8,6 +8,15 @@
     </head>
     <body>
         <div class = "container">
+        <div class="headerLogin">
+                <?php
+                    if (isset($_SESSION['user_name'])) {//로그인 상태 > 로그아웃 버튼 출력
+                        echo "<button class='headerLoginButton' type='button' onclick='moveLogout()'>LOGOUT</button>";
+                    } else { //로그아웃 상태 > 로그인 버튼 출력
+                        echo "<button class='headerLoginButton' type='button' onclick='moveLogin()'>LOGIN</button>";
+                    }   
+                ?>
+            </div>
             <section class="middleBanner">
                     <span class="title">2022 Korea Box Office Report</span>
             </section>
@@ -75,6 +84,18 @@
                         report <br/> by film
                     </button>
                 </div>
+                <form class="selectBox" method="post" action="./movieListByRange.php" >
+                        <select name="audRange" class="rangeSelect">
+                            <option selected="selected" disabled value="0">Select range</option>
+                            <option value="over 10 million">over 10 million</option>
+                            <option value="5 ~ 10 million">5 ~ 10 million</option>
+                            <option value="1 ~ 5 million">1 ~ 5 million</option>
+                            <option value="under 1 million">under 1 million</option>
+                        </select>
+                        <div>
+                            <button class="selectButton" type="submit" value="submit" name="submit" onclick='moveRangeList()'> > </button>
+                        </div>
+                    </form>
                 
                 <?php
                         $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
@@ -120,23 +141,7 @@
                         }
                         
                 ?>
-                
-
-
-                    <form class="selectBox" method="post" action="./movieListByRange.php" >
-                        <select name="audRange" class="rangeSelect">
-                            <option selected="selected" disabled value="0">Select range</option>
-                            <option value="over 10 million">over 10 million</option>
-                            <option value="5 ~ 10 million">5 ~ 10 million</option>
-                            <option value="1 ~ 5 million">1 ~ 5 million</option>
-                            <option value="under 1 million">under 1 million</option>
-                        </select>
-                        <div>
-                            <button class="selectButton" type="submit" value="submit" name="submit" onclick='moveRangeList()'> > </button>
-                        </div>
-                    </form>
-
-
+            
             </section>
   
             <div class="commentInputForm">

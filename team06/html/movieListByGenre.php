@@ -16,6 +16,15 @@
 
     ?>
         <div class = "container">
+        <div class="headerLogin">
+                <?php
+                    if (isset($_SESSION['user_name'])) {//로그인 상태 > 로그아웃 버튼 출력
+                        echo "<button class='headerLoginButton' type='button' onclick='moveLogout()'>LOGOUT</button>";
+                    } else { //로그아웃 상태 > 로그인 버튼 출력
+                        echo "<button class='headerLoginButton' type='button' onclick='moveLogin()'>LOGIN</button>";
+                    }   
+                ?>
+            </div>
             <section class="middleBanner">
                     <span class="title">2022 Korea Box Office Report</span>
             </section>
@@ -144,7 +153,7 @@
                         </div>
                         <!--댓글 입력 제출 버튼-->
                         <div>
-                            <button class="commentButton" type="submit">submit </button>
+                            <button class="commentButton" type="submit">> </button>
                         </div>
                     </form>
                 </div>

@@ -16,12 +16,13 @@
                 <div class="snd_container"> 
                     <div class= "trd_container">
                         <div class="snackIcon"></div>
-                        <span class="snackFeature"> theater snack vote result</span>
+                        <span class="snackFeature">theater snack vote </span>
                     </div>   
                 </div> 
             </section>
             <!--php문--> 
             <div class="vote_container">
+             <!--   <iframe id="iframe1" name="iframe1" style="display:none"></iframe> -->
                 <form  class="voteCheckBox" method="post" action="voteSave.php">
                     <label><input type="checkbox" name="snack" value="1" onclick="clickCheck(this)"> sweetpopcorn</label>
                     <br/>
@@ -33,7 +34,7 @@
                     <br/>
                     <label><input type="checkbox" name="snack" value="5" onclick="clickCheck(this)"> squid</label>
                     <br/>
-                    <button class="voteSubmitButton" type="submit" onclick='voteSubmit()'>
+                    <button class="voteSubmitButton" type="submit" > <!--onclick='voteSubmit()'-->
                         SUBMIT
                     </button>
                 </form>

@@ -42,7 +42,7 @@
 
 
                             // 해당 댓글의 작성자인 경우 수정과 삭제 기능 표시
-                            if($_SESSION['user_idx']==$user_idx) {
+                            if(isset($_SESSION['user_idx']) && $_SESSION['user_idx']==$user_idx) {
                                 echo "<div>&nbsp;&nbsp;&nbsp;&nbsp;$user_name</div>
                                 <div class='commentOutput'> 
                                     <span>$content</span>  

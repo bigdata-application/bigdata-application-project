@@ -39,7 +39,7 @@
                             }
                             $content= $rowData['content'];
 
-                            if($_SESSION['user_idx']==$user_idx) {
+                            if(isset($_SESSION['user_idx']) && $_SESSION['user_idx']==$user_idx) {
                             echo "<div>&nbsp;&nbsp;&nbsp;&nbsp;$user_name</div>
                             <div class='commentOutput'> 
                                 <span>$content</span>

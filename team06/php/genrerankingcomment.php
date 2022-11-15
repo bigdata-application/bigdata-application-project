@@ -3,8 +3,8 @@
 
 session_start();
 
-if(!$_SESSION['user_idx']) {
-    echo "<script> document.location.href='./login.php'; </script>";
+if(!isset($_SESSION['user_name'])) {
+    echo "<script> alert('use service after login'); document.location.href='../html/login.html'; </script>";
 
 }
 
@@ -15,13 +15,25 @@ else{
     $genreOption = $_SESSION['genreValue'];
 
 
-    $mysqli= mysqli_connect("localhost", "team06", "", "team06");
+    $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
     
+
+    //$sql= 
+    "select genre_id from genre where genre_name='$genreOption';";
+
+    //$genre_id = mysqli_query($mysqli, $sql);
+
+
+    //echo $genre_id;
+
     $sql= 
     "START TRANSACTION;
-    insert into genre_ranking_comment(user_idx, genre, content) values($this_user, '".$_SESSION['genreValue']."','".$_POST['comment']."');
+    insert into genre_ranking_comment(user_idx, genre_id, content) values($this_user, (select genre_id from genre where genre_name='$genreOption'),'".$content."');
     select * from genre_ranking_comment;
     COMMIT;";
+
+    echo $sql;
+
     $result = mysqli_multi_query($mysqli, $sql);
     
 

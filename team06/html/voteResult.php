@@ -155,7 +155,7 @@
 
                         <form action= "../php/votecomment.php" METHOD= "post">
                             <div class="commentInput"> 
-                                <input class="input" type="text" placeholder="enter comment">
+                                <input class="input" name="comment" type="text" placeholder="enter comment">
                             </div>
                             <!--댓글 입력 제출 버튼-->
                             <div>

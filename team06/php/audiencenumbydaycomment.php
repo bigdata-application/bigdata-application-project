@@ -2,10 +2,8 @@
 
     session_start();
 
-    if(!$_SESSION['user_idx']) {//로그인하지 않은 유저 로그인페이지로 리다이렉트
-        //echo "세션 아이디 ㄴㄴ";
-        echo "<script> document.location.href='./login.php'; </script>";
-
+    if(!isset($_SESSION['user_name'])) {//로그인하지 않은 유저 로그인페이지로 리다이렉트
+        echo "<script> alert('use service after login'); document.location.href='../html/login.html'; </script>";
     }
     else{//댓글 입력하면 report1 페이지로 리다이렉트
     $content= $_POST['comment'];

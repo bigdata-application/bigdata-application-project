@@ -9,15 +9,17 @@
     <body>
     <?php
         session_start();
-        $genreOption = $_POST['genre'];
-        $_SESSION['genreValue'] = $genreOption;
+        if(isset($_GET['genre'])){
+        $genreOption = $_GET['genre'];
+        $_SESSION['genreValue'] = $genreOption;//genreValue 세션에 $genreOption 담기
+        }
         $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
-
 
     ?>
         <div class = "container">
             <div class="headerLogin">
                 <?php
+                
                     if (isset($_SESSION['user_name'])) {//로그인 상태 > 로그아웃 버튼 출력
                         echo "<button class='headerLoginButton' type='button' onclick='moveLogout()'>LOGOUT</button>";
                     } else { //로그아웃 상태 > 로그인 버튼 출력
@@ -87,20 +89,21 @@
                     <div class= "trd_container">
                         <div class="genreIcon"></div>
                         <?php
-                        echo "<span class='genreFeature'> {$genreOption} movie<br/> audience ranking</span>";
+                        $genre=$_SESSION['genreValue'];
+                        echo "<span class='genreFeature'> $genre movie<br/> audience ranking</span>";
                         ?>
                     </div>
                 </div>
-                    <form class="selectBox" method="post" action="./movieListByGenreAndNation.php" >
+                    <form class="selectBox" method="get" action="./movieListByGenreAndNation.php" >
                             <select name="genreNation" class="nationSelect">
                                 <option selected="selected" disabled value="0">Select nation</option>
                                 <option value="한국">Korea</option>
                                 <option value="미국">USA</option>
                                 <option value="일본">Japan</option>
-                                <option value="기타">etc</option>
+                                <option value="etc">etc</option>
                             </select>
                             <div>
-                                <button class="selectButton" type="submit" value="submit" name="submit" onclick=' moveGenreAndNationList()'> > </button>
+                                <button class="selectButton" type="submit" onclick=' moveGenreAndNationList()'> > </button>
                             </div>
                     </form>
 
@@ -115,7 +118,7 @@
                             $movie_name_kor = $movieArray['movie_name_kor'];
                             $nation = $movieArray['nation'];
                             $earned_money = $movieArray['earned_money'];
-                            
+                            $genre= $_SESSION['genreValue'];
                             echo '<div class = "movieInfoBox">';
                             echo '<div class = "poster">';
                             echo '</div>';
@@ -124,7 +127,7 @@
                                 <p class='boldTitle'>(관객수) $audience </p>
                                 <p class='infoText'>title: $movie_name_kor </p>
                                 <p class='infoText'>nation: $nation </p>
-                                <p class='infoText'>genre: $genreOption </p>
+                                <p class='infoText'>genre: $genre</p>
                                 <p class='infoText'> profit: $earned_money </p>
                                 </div>";
                             

@@ -2,8 +2,8 @@
 
     session_start();
 
-    if(!$_SESSION['user_idx']) {
-        echo "<script> document.location.href='./login.php'; </script>";
+    if(!isset($_SESSION['user_name'])) {
+        echo "<script> alert('use service after login'); document.location.href='../html/login.html'; </script>";
 
     }
     else{

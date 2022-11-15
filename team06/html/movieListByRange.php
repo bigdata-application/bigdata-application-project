@@ -9,8 +9,10 @@
     <body>
     <?php
         session_start();
-        $rangeOption = $_POST['audRange'];
+        if(isset($_GET['audRange'])) {
+        $rangeOption = $_GET['audRange'];
         $_SESSION['rangeValue'] = $rangeOption;
+        }
     ?>
         <div class = "container">
         <div class="headerLogin">
@@ -30,7 +32,9 @@
                     <!-- 댓글 출력 -->
                     <?php //db로부터 댓글 가져오기
                         $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
-                        $sql = "select * from audience_range_comment order by id desc;";
+                        $range=$_SESSION['rangeValue'];
+                        $sql = "select * from audience_range_comment where range_id= (select range_id from audience_range where audience_range='$range' )order by id desc;";
+                        //echo $sql;
                         $result=mysqli_query($mysqli,$sql);
                         while ($rowData= $result->fetch_array()) {
                             $id=$rowData['id'];
@@ -80,28 +84,28 @@
                     <div class= "trd_container">
                         <div class="audienceIcon"></div>
                         <?php
-                        echo "<span class='audienceFeature'> {$rangeOption} <br/> audience ranking</span>";
+                        echo "<span class='audienceFeature'> {$_SESSION['rangeValue']} <br/> audience ranking</span>";
                         ?>
                     </div>
                     <button class="reportButton2 disabled" type="button" onclick='moveFeature2Report2()'>
                         report <br/> by film
                     </button>
                     </div>
-                    <form class="selectBox" method="post" action="./movieListByRangeAndNation.php" >
+                    <form class="selectBox" method="get" action="./movieListByRangeAndNation.php" >
                             <select name="nationValue" class="nationSelect"> 
                                 <!--원래 name = "nation"-->
                                 <option selected="selected" disabled value="0">Select nation</option>
-                                <option value="Korean">Korea</option>
-                                <option value="American">USA</option>
-                                <option value="Japanese">Japan</option>
-                                <option value="other">etc</option>
+                                <option value="한국">Korea</option>
+                                <option value="미국">USA</option>
+                                <option value="일본">Japan</option>
+                                <option value="etc">etc</option>
                             </select>
                             <div>
                                 <button class="selectButton" type="submit" value="submit" name="submit" onclick='moveRangeAndNationList()'> > </button>
                             </div>
                     </form>
-                    <form name="passInfo" method="post" action="./movieListByRangeAndNation.php">
-                        <input type = "hidden" value="<?php echo $_POST['audRange']; ?>" name = "passRange">
+                    <form name="passInfo" method="get" action="./movieListByRangeAndNation.php">
+                        <input type = "hidden" value="<?php echo $_SESSION['rangeValue']; ?>" name = "passRange">
                     </form>
 
                     <?php
@@ -112,10 +116,12 @@
                           exit();
                         }else{
                           $condition = "";
-                          if ($rangeOption == 'over 10 million') $condition = "audience >= 10000000";
-                          if ($rangeOption == '5 ~ 10 million') $condition = "audience < 10000000 and audience >= 5000000";
-                          if ($rangeOption == '1 ~ 5 million') $condition = "audience < 5000000 and audience >= 1000000"; 
-                          if ($rangeOption == 'under 1 million') $condition = "audience < 1000000";
+                          if ($_SESSION['rangeValue'] == 'over 10 million') {
+                            $condition = "audience >= 10000000";
+                          }
+                          if ($_SESSION['rangeValue'] == '5 million ~ 10 million') $condition = "audience < 10000000 and audience >= 5000000";
+                          if ($_SESSION['rangeValue'] == '1 million ~ 5 million') $condition = "audience < 5000000 and audience >= 1000000"; 
+                          if ($_SESSION['rangeValue'] == 'under 1 million') $condition = "audience < 1000000";
 
                           $sql = "SELECT audience, movie_name_kor, nation, genre, earned_money 
                               from mv_info where $condition order by audience desc";

@@ -10,13 +10,18 @@
     <?php
         session_start();
         $passGenre = $_SESSION['genreValue'];
-        $nationOption = $_POST['genreNation'];
-        //$passGenre = $_SESSION['nationOption'];
+        
+        if(isset($_GET['genreNation'])) {
+            $_SESSION['genreNation'] = $_GET['genreNation'];
+        }
+
+        $nationName= $_SESSION['genreNation'];
         $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
     ?>
         <div class = "container">
             <div class="headerLogin">
                     <?php
+                    //session_start();
                         if (isset($_SESSION['user_name'])) {//로그인 상태 > 로그아웃 버튼 출력
                             echo "<button class='headerLoginButton' type='button' onclick='moveLogout()'>LOGOUT</button>";
                         } else { //로그아웃 상태 > 로그인 버튼 출력
@@ -32,9 +37,7 @@
                     <!--댓글 출력-->
                     <?php 
                         
-                        $sql= "select * 
-                        from GENRE_RANKING_BY_NATION_COMMENT
-                        order by id desc;";
+                        $sql= "select * from genre_ranking_by_nation_comment where genre_id= (select genre_id from genre where genre_name='$passGenre') && nation_id=(select nation_id from nation where nation_name='".$_SESSION['genreNation']."') order by id desc;";
 
                         $res=mysqli_query($mysqli,$sql);
 
@@ -89,14 +92,15 @@
                     <div class= "trd_container">
                         <div class="genreIcon"></div>
                         <?php
-                        echo "<span class='genreFeature'> {$nationOption} {$passGenre}  movie <br/>audience ranking</span>";
+                        $nation= $_SESSION['genreNation'];
+                        echo "<span class='genreFeature'> {$nation} {$passGenre}  movie <br/>audience ranking</span>";
                         ?>
                     </div>
                     </div>
 
                     <?php
                         
-                        $sql = "select * from mv_info where genre='".$_SESSION['genreValue']."' and nation='".$_POST['genreNation']."' order by audience desc;";
+                        $sql = "select * from mv_info where genre='".$_SESSION['genreValue']."' and nation='".$_SESSION['genreNation']."' order by audience desc;";
                         $res = mysqli_query($mysqli,$sql);
                         
                         while ($movieArray = mysqli_fetch_array($res,MYSQLI_ASSOC)) {
@@ -130,11 +134,11 @@
                     <div>+comment&nbsp;&nbsp;&nbsp;&nbsp;</div>
                     <form action= "../php/genrenationrankingcomment.php" METHOD= "post">
                         <div class="commentInput"> 
-                            <input class="input" type="text" placeholder="enter comment">
+                            <input class="input" name= "comment" type="text" placeholder="enter comment">
                         </div>
                     <!--댓글 입력 제출 버튼-->
                         <div>
-                            <button class="commentButton" type="button" > > </button>
+                            <button class="commentButton" type="submit" > > </button>
                         </div>
                     </form>
                 </div>

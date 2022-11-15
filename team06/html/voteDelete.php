@@ -1,6 +1,6 @@
 <?php 
 session_start(); 
-if (!$_SESSION['user_name']) {
+if (!isset($_SESSION['user_name'])) {
     	echo "<script> document.location.href='./login.php'; </script>";
 } else { //로그인한 사람만 삭제 버튼 보임
 

@@ -10,6 +10,7 @@
         <div class = "container">
         <div class="headerLogin">
                 <?php
+                    session_start();
                     if (isset($_SESSION['user_name'])) {//로그인 상태 > 로그아웃 버튼 출력
                         echo "<button class='headerLoginButton' type='button' onclick='moveLogout()'>LOGOUT</button>";
                     } else { //로그아웃 상태 > 로그인 버튼 출력
@@ -25,7 +26,7 @@
                     <!--댓글 출력-->
 
                     <?php //db로부터 댓글 가져오기
-                        session_start();
+                        //session_start();
                         $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
                         $sql= "select * from audience_ranking_by_day_comment order by id desc;";//id 내림차순으로 최신순으로 정렬
                         $result=mysqli_query($mysqli,$sql);

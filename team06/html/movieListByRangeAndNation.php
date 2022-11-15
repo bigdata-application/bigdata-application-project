@@ -10,9 +10,11 @@
     <body>
     <?php
         session_start();
+        if(isset($_GET['nationValue'])){
         $passRange = $_SESSION['rangeValue'];
         $rangeOption= $passRange; 
-        $nationOption = $_POST['nationValue'];
+        $_SESSION['nationValue'] = $_GET['nationValue'];
+        }
     ?>
         <div class = "container">
             <div class="headerLogin">
@@ -31,7 +33,9 @@
                 <div class="commentOutputForm2">
                 <?php
                         $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
-                        $sql = "select * from audience_range_nation_comment order by id desc;";
+                        $range=$_SESSION['rangeValue'];
+                        $nation=$_SESSION['nationValue'];
+                        $sql = "select * from audience_range_comment where range_id= (select range_id from audience_range where audience_range='$range' )&& nation_id= (select nation_id from nation where nation_name='$nation') order by id desc;";
                         $result=mysqli_query($mysqli,$sql);
                         while ($rowData= $result->fetch_array()) {
                             $id=$rowData['id'];
@@ -84,7 +88,9 @@
                     <div class= "trd_container">
                         <div class="audienceIcon"></div>
                         <?php
-                        echo "<span class='audienceFeature'> {$passRange} <br/> {$nationOption} movie <br/> audience ranking</span>";
+                        $range=$_SESSION['rangeValue'];
+                        $nationOption=$_SESSION['nationValue'];
+                        echo "<span class='audienceFeature'> {$range} <br/> {$nationOption} movie <br/> audience ranking</span>";
                         ?>
                     </div>
                     <button class="reportButton2 disabled" type="button" onclick='moveFeature2Report2()'>
@@ -93,7 +99,6 @@
                     </div>
 
                 <?php
-                        header('Content-Type: text/html; charset=utf-8');
                         $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
 
                         if(mysqli_connect_error()){
@@ -101,16 +106,16 @@
                           exit();
                         }else{
                           $condition = "";
-                          if ($rangeOption == 'over 10 million') $condition = "audience >= 10000000";
-                          if ($rangeOption == '5 ~ 10 million') $condition = "audience < 10000000 and audience >= 5000000";
-                          if ($rangeOption == '1 ~ 5 million') $condition = "audience < 5000000 and audience >= 1000000"; 
-                          if ($rangeOption == 'under 1 million') $condition = "audience < 1000000";
+                          if ($_SESSION['rangeValue'] == 'over 10 million') $condition = "audience >= 10000000";
+                          if ($_SESSION['rangeValue'] == '5 million ~ 10 million') $condition = "audience < 10000000 and audience >= 5000000";
+                          if ($_SESSION['rangeValue'] == '1 million ~ 5 million') $condition = "audience < 5000000 and audience >= 1000000"; 
+                          if ($_SESSION['rangeValue'] == 'under 1 million') $condition = "audience < 1000000";
 
                           $nation_condition = "";
-                          if ($nationOption == 'Korean') $nation_condition = "nation = '한국'";
-                          if ($nationOption == 'American') $nation_condition = "nation = '미국'";
-                          if ($nationOption == 'Japanese') $nation_condition = "nation = '일본'";
-                          if ($nationOption == 'other') $nation_condition = "nation = '기타'";
+                          if ($nationOption == '한국') $nation_condition = "nation = '한국'";
+                          if ($nationOption == '미국') $nation_condition = "nation = '미국'";
+                          if ($nationOption == '일본') $nation_condition = "nation = '일본'";
+                          if ($nationOption == 'etc') $nation_condition = "nation = '기타'";
 
                           $sql = "SELECT audience, movie_name_kor, nation, genre, earned_money 
                               from mv_info where $condition and $nation_condition order by audience desc";

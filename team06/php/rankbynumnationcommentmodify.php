@@ -9,8 +9,8 @@ $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
 
 $sql= 
     "START TRANSACTION;
-    update audience_range_nation_comment set content = '$modify_content' where id=$id;
-    select * from audience_range_nation_comment;
+    update audience_range_comment set content = '$modify_content' where id=$id;
+    select * from audience_range_comment;
     COMMIT;";
 $result = mysqli_multi_query($mysqli, $sql);
 

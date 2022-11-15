@@ -3,7 +3,7 @@
 $id= $_POST['delete'];
 
 
-$mysqli= mysqli_connect("localhost", "team06", "", "team06");
+$mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
 
 $sql= 
     "START TRANSACTION;

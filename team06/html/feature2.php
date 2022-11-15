@@ -28,7 +28,7 @@
                         <span class="genreFeature">analysis by genre</span>
                     </div>   
                 </div>
-                    <form class="selectBox" method="post" action="./movieListByGenre.php" >
+                    <form class="selectBox" method="get" action="./movieListByGenre.php" >
                         <select name="genre" class="genreSelect">
                             <option selected="selected" disabled value="0">Select genre</option>
                             <option value="드라마">드라마</option>

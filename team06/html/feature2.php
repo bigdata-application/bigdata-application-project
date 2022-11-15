@@ -32,7 +32,7 @@
                         <select name="genre" class="genreSelect">
                             <option selected="selected" disabled value="0">Select genre</option>
                             <option value="드라마">드라마</option>
-                            <option value="로맨스">로맨스</option>
+                            <option value="멜로/로맨스">로맨스</option>
                             <option value="액션">액션</option>
                             <option value="애니메이션">애니메이션</option>
                         </select>

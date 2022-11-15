@@ -96,7 +96,7 @@
                         echo "<span class='genreFeature'> {$nation} {$passGenre}  movie <br/>audience ranking</span>";
                         ?>
                     </div>
-                    </div>
+                </div>
 
                     <?php
                         
@@ -105,25 +105,30 @@
                         
                         while ($movieArray = mysqli_fetch_array($res,MYSQLI_ASSOC)) {
                             $audience = $movieArray['audience'];
+                            $audience_10000 = $audience / 10000; 
+                            $audience_10000 = floor($audience_10000);
+                            $audience_1000 =$audience % 10000; 
                             // $movie_name_eng = $movieArray['movie_name_En'];
                             $movie_name_kor = $movieArray['movie_name_kor'];
                             $nation = $movieArray['nation'];
                             $earned_money = $movieArray['earned_money'];
 
-                            echo '<div class = "movieInfoBox">';
-                            echo '<div class = "poster">';
-                            echo '</div>';
+                            /*포스터 없는 버전*/
+                            echo "<div class = 'movieInfoBox2'>";
+                            echo "<div class = 'movieInfoTitle'>";
+                            echo "<p class='infoText'> $movie_name_kor </p>";
+                            echo "</div>";
 
-                            echo "<div class='info'>
-                                <p class='boldTitle'>(관객수) $audience </p>
-                                <p class='infoText'>title: $movie_name_kor </p>
-                                <p class='infoText'>nation: $nation </p>
-                                <p class='infoText'>genre: $passGenre </p>
-                                <p class='infoText'> profit: $earned_money </p>
-                                </div>";
-
-                            echo '</br>';
-                            echo '</div>';
+                            echo "<div class='movieInfoDetailGrid'>
+                                <p class='movieInfoAudience1'>관객수</p>
+                                <p class='movieInfoAudience2'>{$audience_10000}만 {$audience_1000}명</p>
+                                <p class='movieInfoNation1'>제작</p>
+                                <p class='movieInfoNation2'>$nation</p>
+                                <p class='movieInfoGenre1'>장르</p>
+                                <p class='movieInfoGenre2'>$passGenre</p>
+                                <p class='movieInfoProfit1'>매출</p>
+                                <p class='movieInfoProfit2'>{$earned_money}원</p>
+                            </div>"; //movieInfoDetailGrid
                         }
 
                     ?>

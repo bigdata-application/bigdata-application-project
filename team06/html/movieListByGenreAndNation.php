@@ -89,7 +89,7 @@
                     <div class= "trd_container">
                         <div class="genreIcon"></div>
                         <?php
-                        echo "<span class='genreFeature'> {$passGenre} {$nationOption} movie <br/>audience ranking</span>";
+                        echo "<span class='genreFeature'> {$nationOption} {$passGenre}  movie <br/>audience ranking</span>";
                         ?>
                     </div>
                     </div>

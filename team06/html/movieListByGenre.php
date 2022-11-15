@@ -16,7 +16,7 @@
 
     ?>
         <div class = "container">
-        <div class="headerLogin">
+            <div class="headerLogin">
                 <?php
                     if (isset($_SESSION['user_name'])) {//로그인 상태 > 로그아웃 버튼 출력
                         echo "<button class='headerLoginButton' type='button' onclick='moveLogout()'>LOGOUT</button>";
@@ -26,7 +26,7 @@
                 ?>
             </div>
             <section class="middleBanner">
-                    <span class="title">2022 Korea Box Office Report</span>
+                    <span class="title" onClick="main()">2022 Korea Box Office Report</span>
             </section>
             <div class="commentOutputForm">
                 <div class="commentOutputForm2">
@@ -77,15 +77,9 @@
                             }
 
                         }
-                       
-                        
-                           
-                        
-                        
+  
                     ?>
-
-                </div>
-                    
+    
                 </div>
             </div>
             <section class="features">
@@ -110,10 +104,6 @@
                             </div>
                     </form>
 
-                <div class="movieInfoBox">
-                    <div class="poster">
-
-                    </div>
                     <?php
                         
                         $sql = "select * from mv_info where genre='".$_SESSION['genreValue']."' order by audience desc;";
@@ -125,6 +115,10 @@
                             $movie_name_kor = $movieArray['movie_name_kor'];
                             $nation = $movieArray['nation'];
                             $earned_money = $movieArray['earned_money'];
+                            
+                            echo '<div class = "movieInfoBox">';
+                            echo '<div class = "poster">';
+                            echo '</div>';
 
                             echo "<div class='info'>
                                 <p class='boldTitle'>(관객수) $audience </p>
@@ -133,15 +127,12 @@
                                 <p class='infoText'>genre: $genreOption </p>
                                 <p class='infoText'> profit: $earned_money </p>
                                 </div>";
+                            
+                            echo '</br>';
+                            echo '</div>';
                         }
                         
-
-
-
                     ?>
-
-                    
-                </div>
             </section>
             <div class="commentInputForm">
                 <div class="commentInputForm2">

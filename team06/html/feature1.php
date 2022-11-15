@@ -19,7 +19,7 @@
                 ?>
             </div>
             <section class="middleBanner">
-                    <span class="title">2022 Korea Box Office Report</span>
+                    <span class="title" onClick="main()">2022 Korea Box Office Report</span>
             </section>
             <section class="features">
                 <div class="snd_container">

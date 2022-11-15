@@ -25,7 +25,7 @@
                     ?>
             </div>
             <section class="middleBanner">
-                    <span class="title">2022 Korea Box Office Report</span>
+                    <span class="title" onClick="main()">2022 Korea Box Office Report</span>
             </section>
             <div class="commentOutputForm">
                 <div class="commentOutputForm2">
@@ -94,10 +94,6 @@
                     </div>
                     </div>
 
-                <div class="movieInfoBox">
-                    <div class="poster">
-
-                    </div>
                     <?php
                         
                         $sql = "select * from mv_info where genre='".$_SESSION['genreValue']."' and nation='".$_POST['genreNation']."' order by audience desc;";
@@ -110,6 +106,10 @@
                             $nation = $movieArray['nation'];
                             $earned_money = $movieArray['earned_money'];
 
+                            echo '<div class = "movieInfoBox">';
+                            echo '<div class = "poster">';
+                            echo '</div>';
+
                             echo "<div class='info'>
                                 <p class='boldTitle'>(관객수) $audience </p>
                                 <p class='infoText'>title: $movie_name_kor </p>
@@ -117,13 +117,12 @@
                                 <p class='infoText'>genre: $passGenre </p>
                                 <p class='infoText'> profit: $earned_money </p>
                                 </div>";
+
+                            echo '</br>';
+                            echo '</div>';
                         }
-                        
-
-
 
                     ?>
-                </div>
             </section>
             <div class="commentInputForm">
                 <div class="commentInputForm2">

@@ -99,8 +99,14 @@
                 </div>
 
                     <?php
-                        if($_SESSION['genreNation']=='etc') {
-                            $sql = "select * from mv_info where genre='".$_SESSION['genreValue']."' && nation!='한국'&&nation!='미국'&&nation!='일본' order by audience desc;";    
+                        if($_SESSION['genreValue']=='기타장르'&& $_SESSION['genreNation']=='etc') {
+                            $sql = "select * from mv_info where genre!='드라마'&&genre!='멜로/로맨스'&&genre!='액션'&&genre!='애니메이션' && nation!='한국'&&nation!='미국'&&nation!='일본' order by audience desc;";    
+                        }
+                        else if ($_SESSION['genreValue']!='기타장르'&& $_SESSION['genreNation']=='etc') {
+                            $sql = "select * from mv_info where genre='".$_SESSION['genreValue']."' && nation!='한국'&&nation!='미국'&&nation!='일본' order by audience desc;";
+                        }
+                        else if ($_SESSION['genreValue']=='기타장르'&& $_SESSION['genreNation']!='etc') {
+                            $sql = "select * from mv_info where genre!='드라마'&&genre!='멜로/로맨스'&&genre!='액션'&&genre!='애니메이션' &&nation='".$_SESSION['genreNation']."' order by audience desc;";
                         }
                         else {
                         $sql = "select * from mv_info where genre='".$_SESSION['genreValue']."' and nation='".$_SESSION['genreNation']."' order by audience desc;";
@@ -108,6 +114,7 @@
                         $res = mysqli_query($mysqli,$sql);
                         
                         while ($movieArray = mysqli_fetch_array($res,MYSQLI_ASSOC)) {
+                            $mvcode = $movieArray['mvcode'];
                             $audience = $movieArray['audience'];
                             $audience_10000 = $audience / 10000; 
                             $audience_10000 = floor($audience_10000);
@@ -116,7 +123,10 @@
                             $movie_name_kor = $movieArray['movie_name_kor'];
                             $nation = $movieArray['nation'];
                             $earned_money = $movieArray['earned_money'];
-
+                            $res2=mysqli_query($mysqli, "select genre from mv_info where mvcode=$mvcode");//mv_info 테이블로부터 장르명 추출
+                            while($mvgenre = mysqli_fetch_array($res2,MYSQLI_ASSOC)){
+                                $genre=$mvgenre['genre'];
+                            }
                             /*포스터 없는 버전*/
                             echo "<div class = 'movieInfoBox2'>";
                             echo "<div class = 'movieInfoTitle'>";
@@ -129,7 +139,7 @@
                                 <p class='movieInfoNation1'>제작</p>
                                 <p class='movieInfoNation2'>$nation</p>
                                 <p class='movieInfoGenre1'>장르</p>
-                                <p class='movieInfoGenre2'>$passGenre</p>
+                                <p class='movieInfoGenre2'>$genre</p>
                                 <p class='movieInfoProfit1'>매출</p>
                                 <p class='movieInfoProfit2'>{$earned_money}원</p>
                             </div>"; //movieInfoDetailGrid

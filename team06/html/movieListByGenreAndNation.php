@@ -99,8 +99,12 @@
                 </div>
 
                     <?php
-                        
+                        if($_SESSION['genreNation']=='etc') {
+                            $sql = "select * from mv_info where genre='".$_SESSION['genreValue']."' && nation!='한국'&&nation!='미국'&&nation!='일본' order by audience desc;";    
+                        }
+                        else {
                         $sql = "select * from mv_info where genre='".$_SESSION['genreValue']."' and nation='".$_SESSION['genreNation']."' order by audience desc;";
+                        }
                         $res = mysqli_query($mysqli,$sql);
                         
                         while ($movieArray = mysqli_fetch_array($res,MYSQLI_ASSOC)) {

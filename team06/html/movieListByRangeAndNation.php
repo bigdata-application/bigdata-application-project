@@ -116,9 +116,16 @@
                           if ($nationOption == '미국') $nation_condition = "nation = '미국'";
                           if ($nationOption == '일본') $nation_condition = "nation = '일본'";
                           if ($nationOption == 'etc') $nation_condition = "nation = '기타'";
+                          
+                          if ($nationOption == 'etc') {
+                            $sql = "SELECT audience, movie_name_kor, nation, genre, earned_money 
+                            from mv_info where $condition and nation!='한국'&&nation!='미국'&&nation!='일본' order by audience desc";
+                          }
 
+                          else {
                           $sql = "SELECT audience, movie_name_kor, nation, genre, earned_money 
                               from mv_info where $condition and $nation_condition order by audience desc";
+                          }
                               $res = mysqli_query($mysqli, $sql);
                               
                               if($res){

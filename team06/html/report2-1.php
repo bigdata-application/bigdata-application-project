@@ -147,7 +147,7 @@
                 ?>
             
             </section>
-  
+                        
             <div class="commentInputForm">
                 <div class="commentInputForm2">
                     <!--댓글 입력-->
@@ -163,8 +163,9 @@
                         <button class="commentButton" type="submit"> > </script> </button> 
                     </div>
                         </form>
+                        
                 </div>
-            </div>
+                    </div>
         </div> 
     </body>
     </html>

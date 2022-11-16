@@ -33,7 +33,7 @@
                     <?php //db로부터 댓글 가져오기
                         $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
                         $range=$_SESSION['rangeValue'];
-                        $sql = "select * from audience_range_comment where range_id= (select range_id from audience_range where audience_range='$range' )order by id desc;";
+                        $sql = "select * from audience_range_comment where range_id= (select range_id from audience_range where audience_range='$range' )&& nation_id is null order by id desc;";
                         //echo $sql;
                         $result=mysqli_query($mysqli,$sql);
                         while ($rowData= $result->fetch_array()) {

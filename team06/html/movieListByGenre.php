@@ -37,7 +37,7 @@
                         //session_start();
                         //$mysqli= mysqli_connect("localhost", "team06", "", "team06");
                         $genre=$_SESSION['genreValue'];
-                        $sql= "select * from GENRE_RANKING_BY_NATION_COMMENT where genre_id=(select genre_id from genre where genre_name='$genre') order by id desc;";
+                        $sql= "select * from GENRE_RANKING_BY_NATION_COMMENT where genre_id=(select genre_id from genre where genre_name='$genre') && nation_id is null order by id desc;";
                         $res=mysqli_query($mysqli,$sql);
                         while ($rowData= $res->fetch_array()) {
                             $id=$rowData['id'];

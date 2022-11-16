@@ -13,7 +13,7 @@ $row = mysqli_fetch_row($result);
 
 try {
 /* Prepare insert statement */
-$stmt = mysqli_prepare($mysqli, 'delete from audience_range_comment where id=?;');
+$stmt = mysqli_prepare($mysqli, 'delete from audience_comment where id=?;');
 mysqli_stmt_bind_param($stmt, 'i', $id);
 
 mysqli_stmt_execute($stmt);

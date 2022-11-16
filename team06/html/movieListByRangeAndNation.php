@@ -97,7 +97,53 @@
                         report <br/> by film
                     </button>
                     </div>
+                    <?php
+                        $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
 
+                        if(mysqli_connect_error()){
+                          printf("Conncet failed: %s\n", mysqli_connect_error());
+                          exit();
+                        }else{
+                            $sql = "
+                            select profit
+                            from 
+                            (
+                            select 
+                            case mv_info.nation
+                            when '한국' then '한국'
+                            when '미국' then '미국'
+                            when '일본' then '일본'
+                            else 'etc' end as nation_col,
+                            case mv_info.genre
+                            when '드라마' then '드라마'
+                            when  '로맨스' then '로맨스'
+                            when '액션' then '액션'
+                            when '애니메이션' then '애니메이션'
+                            else 'etc' end as genre_col, 
+                            case
+                            when audience >= 10000000 then 'over 10 million' 
+                            when audience <  10000000 and audience >= 5000000 then '5 million ~ 10 million'
+                            when audience <  5000000 and audience >= 1000000 then '1 million ~ 5 million'
+                            else 'under 1 million' end as audience_col,
+                            avg(earned_money) as profit, count(*) as cnt
+                            from mv_info 
+                            group by audience_col, nation_col, genre_col
+                            with rollup
+                            )V where v.audience_col='".$range."'  and v.nation_col='".$nationOption."' and v.genre_col is null;
+                            ";
+                            $res = mysqli_query($mysqli, $sql);
+                            if($res){
+                                while($result = mysqli_fetch_array($res, MYSQLI_ASSOC)){
+                                    $avgProfit = $result['profit']; 
+                                    $avgProfit = number_format($avgProfit); 
+                                    echo "<div class='avgProfit'>";
+                                    echo "<p class='infoText'>평균 매출: {$avgProfit}원 </p>";
+                                    echo "</div>";
+                                }
+                            }
+
+                        }
+                    ?>
                 <?php
                         $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
 
@@ -120,8 +166,8 @@
                           $sql = "SELECT audience, movie_name_kor, nation, genre, earned_money 
                               from mv_info where $condition and $nation_condition order by audience desc";
                               $res = mysqli_query($mysqli, $sql);
-                              
-                              if($res){
+                              $num = mysqli_num_rows($res); 
+                              if($res && $num>0){
                                 while($result = mysqli_fetch_array($res, MYSQLI_ASSOC)){
                                   $audience = $result['audience'];
                                   $audience_10000 = $audience / 10000; 
@@ -131,6 +177,7 @@
                                   $nation = $result['nation'];
                                   $genre = $result['genre'];
                                   $earned_money = $result['earned_money'];
+                                  $earned_money = number_format($earned_money); 
                                   
                                     /*포스터 없는 버전*/
                                     echo "<div class = 'movieInfoBox2'>";
@@ -151,6 +198,10 @@
 
                                     echo '</div>';
                                 }
+                              }else{
+                                echo "<div class = 'noResult'>";
+                                echo "No Result";
+                                echo '</div>';
                               }
                         }
                         

@@ -28,7 +28,7 @@
                     <?php //db로부터 댓글 가져오기
                         //session_start();
                         $mysqli= mysqli_connect("localhost", "team06", "team06", "team06");
-                        $sql= "select * from audience_range_comment where range_id is null && nation_id is null order by id desc;";//id 내림차순으로 최신순으로 정렬
+                        $sql= "select * from audience_comment order by id desc;";//id 내림차순으로 최신순으로 정렬
                         $result=mysqli_query($mysqli,$sql);
                         while ($rowData= $result->fetch_array()) {
                             $id=$rowData['id'];

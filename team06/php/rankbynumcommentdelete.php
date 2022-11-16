@@ -32,7 +32,7 @@ mysqli_rollback($mysqli);
 throw $exception;
 }
 
-echo "<script> document.location.href='../html/movieListByRangeAndNation.php'; </script>";
+echo "<script> document.location.href='../html/movieListByRange.php'; </script>";
 
 
 

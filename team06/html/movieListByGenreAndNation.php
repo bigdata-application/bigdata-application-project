@@ -163,6 +163,7 @@
                         $num = mysqli_num_rows($res);
                         if($num>0){
                             while ($movieArray = mysqli_fetch_array($res,MYSQLI_ASSOC)) {
+                                $mvcode=$movieArray['mvcode'];
                                 $audience = $movieArray['audience'];
                                 $audience_10000 = $audience / 10000; 
                                 $audience_10000 = floor($audience_10000);

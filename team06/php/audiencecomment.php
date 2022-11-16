@@ -27,7 +27,7 @@
     
     try {
     /* Prepare insert statement */
-    $stmt = mysqli_prepare($mysqli, 'insert into audience_comment(user_idx, content) values(?, ?)');
+    $stmt = mysqli_prepare($mysqli, 'insert into audience_range_comment(user_idx, content) values(?, ?)');
     mysqli_stmt_bind_param($stmt, 'is', $this_user, $content);
     
     mysqli_stmt_execute($stmt);

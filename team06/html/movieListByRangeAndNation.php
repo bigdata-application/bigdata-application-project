@@ -124,30 +124,32 @@
                               if($res){
                                 while($result = mysqli_fetch_array($res, MYSQLI_ASSOC)){
                                   $audience = $result['audience'];
+                                  $audience_10000 = $audience / 10000; 
+                                  $audience_10000 = floor($audience_10000);
+                                  $audience_1000 =$audience % 10000; 
                                   $movie_name_kor = $result['movie_name_kor'];
                                   $nation = $result['nation'];
                                   $genre = $result['genre'];
                                   $earned_money = $result['earned_money'];
-
-                                  echo '<div class = "movieInfoBox">';
-                                  //echo '<div class = "info">';
-
-                                  echo '<div class = "poster">';
-
-                                  echo '</div>';
-
-                                  echo '<div class = "info">';
-                                  echo '<p class="infoText">(관객 수):' .$audience.' </p>';
-                                  echo '<p class="infoText">title:' .$movie_name_kor.' </p>';
-                                  echo '<p class="infoText">nation:' .$nation.' </p>';
-                                  echo '<p class="infoText">genre: '.$genre.' </p>';
-                                  echo '<p class="infoText">profit: '.$earned_money.' </p>';
-                                  echo '</div>';
                                   
-                                  echo '</br>';
+                                    /*포스터 없는 버전*/
+                                    echo "<div class = 'movieInfoBox2'>";
+                                    echo "<div class = 'movieInfoTitle'>";
+                                    echo "<p class='infoText'> $movie_name_kor </p>";
+                                    echo "</div>";
 
-                                  //echo '</div>'; //info 닫기
-                                  echo '</div>'; //movieInfoBox 닫기
+                                    echo "<div class='movieInfoDetailGrid'>
+                                        <p class='movieInfoAudience1'>관객수</p>
+                                        <p class='movieInfoAudience2'>{$audience_10000}만 {$audience_1000}명</p>
+                                        <p class='movieInfoNation1'>제작</p>
+                                        <p class='movieInfoNation2'>$nation</p>
+                                        <p class='movieInfoGenre1'>장르</p>
+                                        <p class='movieInfoGenre2'>$genre</p>
+                                        <p class='movieInfoProfit1'>매출</p>
+                                        <p class='movieInfoProfit2'>{$earned_money}원</p>
+                                    </div>"; //movieInfoDetailGrid
+
+                                    echo '</div>';
                                 }
                               }
                         }

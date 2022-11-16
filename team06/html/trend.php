@@ -61,7 +61,12 @@
 
                             while ($rowData= $result->fetch_array()) {
                                 $rank=$rowData['rank'];
+                                if($rowData['audience_range']==null) {
+                                    $audience_range= 'NULL';
+                                }
+                                else {
                                 $audience_range=$rowData['audience_range'];
+                                }
                                 if($rowData['nation_name']==null) {
                                     $nation_name= 'NULL';
                                 }

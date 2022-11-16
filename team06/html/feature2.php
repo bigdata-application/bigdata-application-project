@@ -35,6 +35,7 @@
                             <option value="멜로/로맨스">로맨스</option>
                             <option value="액션">액션</option>
                             <option value="애니메이션">애니메이션</option>
+                            <option value="기타장르">기타</option>
                         </select>
                         <div>
                             <button class="selectButton" type="submit" value="submit" name="submit" onclick='moveGenreList()'> > </button>

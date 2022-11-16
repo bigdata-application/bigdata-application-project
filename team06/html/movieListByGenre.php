@@ -109,6 +109,7 @@
                     </form>
 
                     <?php
+
                         $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
 
                         if(mysqli_connect_error()){
@@ -157,11 +158,18 @@
                     ?>
                     <?php
                         
+                        if($_SESSION['genreValue']=='기타장르') {
+                            $sql = "select * from mv_info where genre!='드라마'&&genre!='멜로/로맨스'&&genre!='액션'&&genre!='애니메이션' order by audience desc;";
+                        }
+                        else{
                         $sql = "select * from mv_info where genre='".$_SESSION['genreValue']."' order by audience desc;";
+                        }
                         $res = mysqli_query($mysqli,$sql);
+
                         $num = mysqli_num_rows($res);
                         if($num>0){
                             while ($movieArray = mysqli_fetch_array($res,MYSQLI_ASSOC)) {
+                                $mvcode = $movieArray['mvcode'];
                                 $audience = $movieArray['audience'];
                                 $audience_10000 = $audience / 10000; 
                                 $audience_10000 = floor($audience_10000);
@@ -171,12 +179,16 @@
                                 $nation = $movieArray['nation'];
                                 $earned_money = $movieArray['earned_money'];
                                 $earned_money = number_format($earned_money); 
-                                $genre= $_SESSION['genreValue'];
+                                $res2=mysqli_query($mysqli, "select genre from mv_info where mvcode=$mvcode");//mv_info 테이블로부터 장르명 추출
+                                while($mvgenre = mysqli_fetch_array($res2,MYSQLI_ASSOC)){
+                                $genre=$mvgenre['genre'];
+                            }
                                 /*포스터 없는 버전*/
                                 echo "<div class = 'movieInfoBox2'>";
                                 echo "<div class = 'movieInfoTitle'>";
                                 echo "<p class='infoText'> $movie_name_kor </p>";
                                 echo "</div>";
+
 
                                 echo "<div class='movieInfoDetailGrid'>
                                     <p class='movieInfoAudience1'>관객수</p>

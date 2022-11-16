@@ -14,7 +14,7 @@ $row = mysqli_fetch_row($result);
 
 try {
 /* Prepare insert statement */
-$stmt = mysqli_prepare($mysqli, 'update audience_range_comment set content = ? where id=?;');
+$stmt = mysqli_prepare($mysqli, 'update audience_comment set content = ? where id=?;');
 mysqli_stmt_bind_param($stmt, 'si', $modify_content, $id);
 
 mysqli_stmt_execute($stmt);

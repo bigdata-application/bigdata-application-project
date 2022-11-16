@@ -109,6 +109,55 @@
                     </form>
 
                     <?php
+
+                        $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
+
+                        if(mysqli_connect_error()){
+                          printf("Conncet failed: %s\n", mysqli_connect_error());
+                          exit();
+                        }else{
+                            $sql = "
+                            select profit
+                            from 
+                            (
+                            select 
+                            case mv_info.nation
+                            when '한국' then '한국'
+                            when '미국' then '미국'
+                            when '일본' then '일본'
+                            else 'etc' end as nation_col,
+                            case mv_info.genre
+                            when '드라마' then '드라마'
+                            when  '로맨스' then '로맨스'
+                            when '액션' then '액션'
+                            when '애니메이션' then '애니메이션'
+                            else 'etc' end as genre_col, 
+                            case
+                            when audience >= 10000000 then 'over 10 million' 
+                            when audience <  10000000 and audience >= 5000000 then '5 million ~ 10 million'
+                            when audience <  5000000 and audience >= 1000000 then '1 million ~ 5 million'
+                            else 'under 1 million' end as audience_col,
+                            avg(earned_money) as profit, count(*) as cnt
+                            from mv_info 
+                            group by  genre_col, nation_col, audience_col 
+                            with rollup
+                            )V where v.genre_col='".$genre."' and v.nation_col is null and v.audience_col is null;
+                            ";
+                            $res = mysqli_query($mysqli, $sql);
+                            if($res){
+                                while($result = mysqli_fetch_array($res, MYSQLI_ASSOC)){
+                                    $avgProfit = $result['profit']; 
+                                    $avgProfit = number_format($avgProfit); 
+                                    echo "<div class='avgProfit'>";
+                                    echo "<p class='infoText'>평균 매출: {$avgProfit}원 </p>";
+                                    echo "</div>";
+                                }
+                            }
+
+                        }
+                    ?>
+                    <?php
+                        
                         if($_SESSION['genreValue']=='기타장르') {
                             $sql = "select * from mv_info where genre!='드라마'&&genre!='멜로/로맨스'&&genre!='액션'&&genre!='애니메이션' order by audience desc;";
                         }
@@ -116,39 +165,47 @@
                         $sql = "select * from mv_info where genre='".$_SESSION['genreValue']."' order by audience desc;";
                         }
                         $res = mysqli_query($mysqli,$sql);
-                        
-                        while ($movieArray = mysqli_fetch_array($res,MYSQLI_ASSOC)) {
-                            $mvcode = $movieArray['mvcode'];
-                            $audience = $movieArray['audience'];
-                            $audience_10000 = $audience / 10000; 
-                            $audience_10000 = floor($audience_10000);
-                            $audience_1000 =$audience % 10000; 
-                            // $movie_name_eng = $movieArray['movie_name_En'];
-                            $movie_name_kor = $movieArray['movie_name_kor'];
-                            $nation = $movieArray['nation'];
-                            $earned_money = $movieArray['earned_money'];
-                            $res2=mysqli_query($mysqli, "select genre from mv_info where mvcode=$mvcode");//mv_info 테이블로부터 장르명 추출
-                            while($mvgenre = mysqli_fetch_array($res2,MYSQLI_ASSOC)){
+
+                        $num = mysqli_num_rows($res);
+                        if($num>0){
+                            while ($movieArray = mysqli_fetch_array($res,MYSQLI_ASSOC)) {
+                                $mvcode = $movieArray['mvcode'];
+                                $audience = $movieArray['audience'];
+                                $audience_10000 = $audience / 10000; 
+                                $audience_10000 = floor($audience_10000);
+                                $audience_1000 =$audience % 10000; 
+                                // $movie_name_eng = $movieArray['movie_name_En'];
+                                $movie_name_kor = $movieArray['movie_name_kor'];
+                                $nation = $movieArray['nation'];
+                                $earned_money = $movieArray['earned_money'];
+                                $earned_money = number_format($earned_money); 
+                                $res2=mysqli_query($mysqli, "select genre from mv_info where mvcode=$mvcode");//mv_info 테이블로부터 장르명 추출
+                                while($mvgenre = mysqli_fetch_array($res2,MYSQLI_ASSOC)){
                                 $genre=$mvgenre['genre'];
                             }
-                            //$genre= $_SESSION['genreValue'];
-                            /*포스터 없는 버전*/
-                            echo "<div class = 'movieInfoBox2'>";
-                            echo "<div class = 'movieInfoTitle'>";
-                            echo "<p class='infoText'> $movie_name_kor </p>";
-                            echo "</div>";
+                                /*포스터 없는 버전*/
+                                echo "<div class = 'movieInfoBox2'>";
+                                echo "<div class = 'movieInfoTitle'>";
+                                echo "<p class='infoText'> $movie_name_kor </p>";
+                                echo "</div>";
 
-                            echo "<div class='movieInfoDetailGrid'>
-                                <p class='movieInfoAudience1'>관객수</p>
-                                <p class='movieInfoAudience2'>{$audience_10000}만 {$audience_1000}명</p>
-                                <p class='movieInfoNation1'>제작</p>
-                                <p class='movieInfoNation2'>$nation</p>
-                                <p class='movieInfoGenre1'>장르</p>
-                                <p class='movieInfoGenre2'>$genre</p>
-                                <p class='movieInfoProfit1'>매출</p>
-                                <p class='movieInfoProfit2'>{$earned_money}원</p>
-                            </div>"; //movieInfoDetailGrid
-                        }
+
+                                echo "<div class='movieInfoDetailGrid'>
+                                    <p class='movieInfoAudience1'>관객수</p>
+                                    <p class='movieInfoAudience2'>{$audience_10000}만 {$audience_1000}명</p>
+                                    <p class='movieInfoNation1'>제작</p>
+                                    <p class='movieInfoNation2'>$nation</p>
+                                    <p class='movieInfoGenre1'>장르</p>
+                                    <p class='movieInfoGenre2'>$genre</p>
+                                    <p class='movieInfoProfit1'>매출</p>
+                                    <p class='movieInfoProfit2'>{$earned_money}원</p>
+                                </div>"; //movieInfoDetailGrid
+                            }
+                        }else{
+                            echo "<div class = 'noResult'>";
+                            echo "No Result";
+                            echo '</div>';
+                          }
                         
                     ?>
             </section>

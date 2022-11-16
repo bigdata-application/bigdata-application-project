@@ -8,7 +8,7 @@ body {
   -webkit-user-select:none;
   -moz-user-select:none;
   -ms-user-select:none;
-  user-select:none
+  user-select:none;
 }
 
 .container {
@@ -817,6 +817,23 @@ body {
   padding: 0.5rem;
 }
 
+.headerTrendButton {
+  position: relative; 
+  left: 90%; 
+  top: 15%; 
+  width: 5rem;
+  border: 1px solid black;
+  border-radius: 25px;
+  font-size: 1rem;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  background-color: white;
+  border-radius: 15px;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-bottom: 3px;
+}
+
 .headerLoginButton:hover{
   background: black; 
   color: white;  
@@ -960,3 +977,22 @@ body {
   text-align: right;
 }
 
+.avgProfit{
+  position: relative;
+  top: 1rem;
+  /*top: 3%; 수정*/
+}
+
+.avgProfitGenre{
+  position: relative;
+  top: 1rem;
+}
+
+.noResult{ 
+	margin-top: 5rem;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  font-size: 1.5rem;
+  color: gray; 
+}

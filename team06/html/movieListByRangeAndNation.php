@@ -224,8 +224,8 @@
                         }else{
                           $condition = "";
                           if ($_SESSION['rangeValue'] == 'over 10 million') $condition = "audience >= 10000000";
-                          if ($_SESSION['rangeValue'] == '5 million ~ 10 million') $condition = "audience < 10000000 and audience >= 5000000";
-                          if ($_SESSION['rangeValue'] == '1 million ~ 5 million') $condition = "audience < 5000000 and audience >= 1000000"; 
+                          if ($_SESSION['rangeValue'] == '5 ~ 10 million') $condition = "audience < 10000000 and audience >= 5000000";
+                          if ($_SESSION['rangeValue'] == '1 ~ 5 million') $condition = "audience < 5000000 and audience >= 1000000"; 
                           if ($_SESSION['rangeValue'] == 'under 1 million') $condition = "audience < 1000000";
 
                           $nation_condition = "";

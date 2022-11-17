@@ -90,8 +90,8 @@
                         <select name="audRange" class="rangeSelect">
                             <option selected="selected" disabled value="0">Select range</option>
                             <option value="over 10 million">over 10 million</option>
-                            <option value="5 million ~ 10 million">5 ~ 10 million</option>
-                            <option value="1 million ~ 5 million">1 ~ 5 million</option>
+                            <option value="5 ~ 10 million">5 ~ 10 million</option>
+                            <option value="1 ~ 5 million">1 ~ 5 million</option>
                             <option value="under 1 million">under 1 million</option>
                         </select>
                         <div>

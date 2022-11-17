@@ -11,6 +11,7 @@
         <div class="headerLogin">
                 <?php
                     session_start();
+                    unset($_SESSION["rangeValue"]);
                     if (isset($_SESSION['user_name'])) {//로그인 상태 > 로그아웃 버튼 출력
                         echo "<button class='headerLoginButton' type='button' onclick='moveLogout()'>LOGOUT</button>";
                     } else { //로그아웃 상태 > 로그인 버튼 출력

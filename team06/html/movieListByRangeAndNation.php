@@ -11,7 +11,7 @@
     <?php
         session_start();
         $passRange = $_SESSION['rangeValue'];
-        if(!isset($_GET['nationValue'])){
+        if(!isset($_GET['nationValue'])&&!isset($_SESSION['nationValue'])){
             echo  "<script>alert('please select nation'); document.location.href='./movieListByRange.php?audRange=$passRange'; </script>";
         }
         if(isset($_GET['nationValue'])){

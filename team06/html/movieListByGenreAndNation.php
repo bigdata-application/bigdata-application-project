@@ -10,7 +10,7 @@
     <?php
         session_start();
         $passGenre = $_SESSION['genreValue'];
-        if(!isset($_GET['genreNation'])){
+        if(!isset($_GET['genreNation'])&&!isset($_SESSION['genreNation'])){
             echo  "<script>alert('please select nation'); document.location.href='./movieListByGenre.php?genre=$passGenre'; </script>";
         }
         if(isset($_GET['genreNation'])) {

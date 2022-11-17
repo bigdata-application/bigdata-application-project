@@ -9,7 +9,9 @@
     <body>
     <?php
         session_start();
-        if(!isset($_GET['genre'])){
+        unset($_SESSION["genreNation"]);
+
+        if(!isset($_GET['genre'])&&!isset($_SESSION['genreValue'])){
             echo  "<script>alert('please select genre'); document.location.href='../html/feature2.php'; </script>";
         }
         if(isset($_GET['genre'])){

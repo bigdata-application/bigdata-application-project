@@ -9,7 +9,9 @@
     <body>
     <?php
         session_start();
-        if(!isset($_GET['audRange'])) {
+        unset($_SESSION["nationValue"]);
+
+        if(!isset($_GET['audRange'])&&!isset($_SESSION['rangeValue'])) {
             
                 echo  "<script>alert('please select Range'); document.location.href='../html/report2-1.php'; </script>";
             

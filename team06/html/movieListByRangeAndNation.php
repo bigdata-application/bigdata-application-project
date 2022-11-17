@@ -144,6 +144,73 @@
 
                         }
                     ?>
+                <?php //drill down
+                    $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
+
+                    if(mysqli_connect_error()){
+                      printf("Conncet failed: %s\n", mysqli_connect_error());
+                      exit();
+                    }else{
+                        $sql = "
+                        select nation as etc_nation, COUNT(nation) as cnt from 
+                            (select 
+                            mv_info.earned_money as money,
+                            case mv_info.nation
+                            when '한국' then '한국'
+                            when '미국' then '미국'
+                            when '일본' then '일본'
+                            else 'etc' end as nationc,
+                            case mv_info.genre
+                            when '드라마' then '드라마'
+                            when  '로맨스' then '로맨스'
+                            when '액션' then '액션'
+                            when '애니메이션' then '애니메이션'
+                            else 'etc' end as genrec, 
+                            case
+                            when audience >= 10000000 then 'over 10 million' 
+                            when audience <  10000000 and audience >= 5000000 then '5 million ~ 10 million'
+                            when audience <  5000000 and audience >= 1000000 then '1 million ~ 5 million'
+                            else 'under 1 million' end as audiencec
+                            from mv_info 
+                            group by nation, audience, genre
+                            ) V inner join 
+                            (
+                             select 
+	                        mv_info.movie_name_kor, 
+                            mv_info.earned_money as money,
+                            mv_info.nation,
+                            case mv_info.genre
+                            when '드라마' then '드라마'
+                            when  '로맨스' then '로맨스'
+                            when '액션' then '액션'
+                            when '애니메이션' then '애니메이션'
+                            else 'etc' end as genre, 
+                            case
+                            when audience >= 10000000 then 'over 10 million' 
+                            when audience <  10000000 and audience >= 5000000 then '5 million ~ 10 million'
+                            when audience <  5000000 and audience >= 1000000 then '1 million ~ 5 million'
+                            else 'under 1 million' end as audience
+                            from mv_info)X on v.money = x.money  and v.genrec = x.genre and v.audiencec = x.audience
+                            where v.nationc!='한국' and  v.nationc!='미국' and v.nationc!='일본' and v.audiencec='".$range."'
+                            group by nation
+                            ORDER BY cnt DESC;   
+                            ";
+                            $res = mysqli_query($mysqli, $sql);
+                            $num = mysqli_num_rows($res); 
+            
+                            if($res && $num>0){
+                               // echo " 기타국가> ";
+                                echo "<div class='etcNation'> <p class='infoText'> <기타국가><br/>";
+                                while($result = mysqli_fetch_array($res, MYSQLI_ASSOC)){
+                                    $etcNation = $result['etc_nation']; 
+                                    $count = $result['cnt']; 
+                                    echo "".$etcNation."&nbsp;";
+                                    echo "".$count."/&nbsp;";
+                                }
+                                echo "</p></div>";
+                            }
+                    }
+                ?>
                 <?php
                         $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
 

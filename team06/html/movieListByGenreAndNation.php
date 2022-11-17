@@ -95,6 +95,8 @@
                         <div class="genreIcon"></div>
                         <?php
                         $nation= $_SESSION['genreNation'];
+                        $passGenre = $_SESSION['genreValue'];
+                        if($passGenre=='기타장르'){$passGenre='기타';}
                         if($nation=='etc'){$nation='기타 국가';}
                         echo "<span class='genreFeature'> {$passGenre} 장르 {$nation} 영화 <br/>audience ranking</span>";
                         ?>

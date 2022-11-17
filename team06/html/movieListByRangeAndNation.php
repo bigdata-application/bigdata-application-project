@@ -94,6 +94,7 @@
                         <?php
                         $range=$_SESSION['rangeValue'];
                         $nationOption=$_SESSION['nationValue'];
+                        if($nationOption=='etc'){$nation='기타 국가';}
                         echo "<span class='audienceFeature'> {$passRange} <br/> {$nation} 영화 <br/> audience ranking</span>";
                         ?>
                     </div>

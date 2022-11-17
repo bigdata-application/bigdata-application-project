@@ -95,6 +95,7 @@
                         <div class="genreIcon"></div>
                         <?php
                         $genre=$_SESSION['genreValue'];
+                        if($genre=='기타장르'){$genre='기타';}
                         echo "<span class='genreFeature'> $genre 장르 영화<br/> audience ranking</span>";
                         ?>
                     </div>

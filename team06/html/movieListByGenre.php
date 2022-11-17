@@ -9,6 +9,9 @@
     <body>
     <?php
         session_start();
+        if(!isset($_GET['genre'])){
+            echo  "<script>alert('please select genre'); document.location.href='../html/feature2.php'; </script>";
+        }
         if(isset($_GET['genre'])){
         $genreOption = $_GET['genre'];
         $_SESSION['genreValue'] = $genreOption;//genreValue 세션에 $genreOption 담기
@@ -34,8 +37,7 @@
                 <div class="commentOutputForm2">
                     <!--댓글 출력-->
                     <?php 
-                        //session_start();
-                        //$mysqli= mysqli_connect("localhost", "team06", "", "team06");
+                        
                         $genre=$_SESSION['genreValue'];
                         $sql= "select * from GENRE_RANKING_BY_NATION_COMMENT where genre_id=(select genre_id from genre where genre_name='$genre') && nation_id is null order by id desc;";
                         $res=mysqli_query($mysqli,$sql);

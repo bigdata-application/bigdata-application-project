@@ -9,6 +9,11 @@
     <body>
     <?php
         session_start();
+        if(!isset($_GET['audRange'])) {
+            
+                echo  "<script>alert('please select Range'); document.location.href='../html/report2-1.php'; </script>";
+            
+        }
         if(isset($_GET['audRange'])) {
         $rangeOption = $_GET['audRange'];
         $_SESSION['rangeValue'] = $rangeOption;

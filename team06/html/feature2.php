@@ -38,7 +38,7 @@
                             <option value="기타장르">기타</option>
                         </select>
                         <div>
-                            <button class="selectButton" type="submit" value="submit" name="submit" onclick='moveGenreList()'> > </button>
+                            <button class="selectButton" type="submit"onclick='moveGenreList()'> > </button>
                         </div>
                     </form>  
             </section>  

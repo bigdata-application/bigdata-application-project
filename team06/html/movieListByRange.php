@@ -101,7 +101,7 @@
                                 <option value="etc">etc</option>
                             </select>
                             <div>
-                                <button class="selectButton" type="submit" value="submit" name="submit" onclick='moveRangeAndNationList()'> > </button>
+                                <button class="selectButton" type="submit" onclick='moveRangeAndNationList()'> > </button>
                             </div>
                     </form>
                     <form name="passInfo" method="get" action="./movieListByRangeAndNation.php">

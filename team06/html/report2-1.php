@@ -94,7 +94,7 @@
                             <option value="under 1 million">under 1 million</option>
                         </select>
                         <div>
-                            <button class="selectButton" type="submit" value="submit" name="submit" onclick='moveRangeList()'> > </button>
+                            <button class="selectButton" type="submit" onclick='moveRangeList()'> > </button>
                         </div>
                     </form>
                 

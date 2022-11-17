@@ -10,11 +10,12 @@
     <body>
     <?php
         session_start();
-        if(isset($_GET['nationValue'])){
         $passRange = $_SESSION['rangeValue'];
+        if(isset($_GET['nationValue'])){
         $rangeOption= $passRange; 
         $_SESSION['nationValue'] = $_GET['nationValue'];
         }
+        $nation=$_SESSION['nationValue'];
     ?>
         <div class = "container">
             <div class="headerLogin">
@@ -34,7 +35,7 @@
                 <?php
                         $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
                         $range=$_SESSION['rangeValue'];
-                        $nation=$_SESSION['nationValue'];
+                        //$nation=$_SESSION['nationValue'];
                         $sql = "select * from audience_range_comment where range_id= (select range_id from audience_range where audience_range='$range' )&& nation_id= (select nation_id from nation where nation_name='$nation') order by id desc;";
                         $result=mysqli_query($mysqli,$sql);
                         while ($rowData= $result->fetch_array()) {
@@ -90,7 +91,7 @@
                         <?php
                         $range=$_SESSION['rangeValue'];
                         $nationOption=$_SESSION['nationValue'];
-                        echo "<span class='audienceFeature'> {$range} <br/> {$nationOption} movie <br/> audience ranking</span>";
+                        echo "<span class='audienceFeature'> {$passRange} <br/> {$nation} movie <br/> audience ranking</span>";
                         ?>
                     </div>
                     <button class="reportButton2 disabled" type="button" onclick='moveFeature2Report2()'>
@@ -129,7 +130,7 @@
                             from mv_info 
                             group by audience_col, nation_col, genre_col
                             with rollup
-                            )V where v.audience_col='".$range."'  and v.nation_col='".$nationOption."' and v.genre_col is null;
+                            )V where v.audience_col='".$passRange."'  and v.nation_col='".$nation."' and v.genre_col is null;
                             ";
                             $res = mysqli_query($mysqli, $sql);
                             if($res){

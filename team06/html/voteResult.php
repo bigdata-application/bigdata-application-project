@@ -93,16 +93,16 @@
                     <?php
                         $mysqli = mysqli_connect("localhost", "team06", "team06","team06"); 
                         $sql = "
-                            SELECT food_name,
-                            COUNT(food_name_id) AS cnt 
-                            FROM 
-                            (
-                            SELECT user_prefer_food_vote.food_name_id, food_name_list.food_name  
-                            FROM user_prefer_food_vote INNER JOIN food_name_list
-                            ON user_prefer_food_vote.food_name_id=food_name_list.id
-                            ) V
-                            GROUP BY v.food_name
-                            ORDER BY cnt DESC;
+                                SELECT food_name,
+                                COUNT(food_name_id) AS cnt 
+                                FROM 
+                                (
+                                SELECT food_name_id, food_name  
+                                FROM food_name_list A LEFT JOIN user_prefer_food_vote B
+                                ON a.id=b.food_name_id
+                                ) V
+                                GROUP BY v.food_name
+                                ORDER BY cnt DESC;
                                     ";
                         $result = mysqli_query($mysqli, $sql); 
                         $num = 0;  

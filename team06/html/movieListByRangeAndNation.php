@@ -94,7 +94,7 @@
                         <?php
                         $range=$_SESSION['rangeValue'];
                         $nationOption=$_SESSION['nationValue'];
-                        echo "<span class='audienceFeature'> {$passRange} <br/> {$nation} movie <br/> audience ranking</span>";
+                        echo "<span class='audienceFeature'> {$passRange} <br/> {$nation} 영화 <br/> audience ranking</span>";
                         ?>
                     </div>
                     <button class="reportButton2 disabled" type="button" onclick='moveFeature2Report2()'>
@@ -150,11 +150,11 @@
                     ?>
                 <?php //drill down
                     $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
-
+                    $isEtc = $_GET['nationValue'];
                     if(mysqli_connect_error()){
                       printf("Conncet failed: %s\n", mysqli_connect_error());
                       exit();
-                    }else{
+                    }else if($isEtc=='etc'){
                         $sql = "
                         select nation as etc_nation, COUNT(nation) as cnt from 
                             (select 
@@ -204,7 +204,7 @@
             
                             if($res && $num>0){
                                // echo " 기타국가> ";
-                                echo "<div class='etcNation'> <p class='infoText'> <기타국가><br/>";
+                                echo "<div class='etcNation'> <p class='infoText'> <기타 국가><br/>";
                                 while($result = mysqli_fetch_array($res, MYSQLI_ASSOC)){
                                     $etcNation = $result['etc_nation']; 
                                     $count = $result['cnt']; 

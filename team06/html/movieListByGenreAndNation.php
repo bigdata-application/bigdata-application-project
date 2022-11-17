@@ -95,7 +95,8 @@
                         <div class="genreIcon"></div>
                         <?php
                         $nation= $_SESSION['genreNation'];
-                        echo "<span class='genreFeature'> {$nation} {$passGenre}  movie <br/>audience ranking</span>";
+                        if($nation=='etc'){$nation='기타 국가';}
+                        echo "<span class='genreFeature'> {$passGenre} 장르 {$nation} 영화 <br/>audience ranking</span>";
                         ?>
                     </div>
                 </div>
@@ -149,11 +150,11 @@
                     ?>
                                     <?php //drill down
                     $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
-
+                    $isEtc = $_GET['genreNation'];
                     if(mysqli_connect_error()){
                       printf("Conncet failed: %s\n", mysqli_connect_error());
                       exit();
-                    }else{
+                    }else if($isEtc=='etc'){
                         $sql = "
                         select nation as etc_nation, COUNT(nation) as cnt from 
                             (select 

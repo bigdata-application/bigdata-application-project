@@ -983,6 +983,13 @@ body {
   /*top: 3%; 수정*/
 }
 
+.etcNation{
+  position: relative;
+  top: 1rem;
+  text-align: center;
+  /*top: 3%; 수정*/
+}
+
 .avgProfitGenre{
   position: relative;
   top: 1rem;

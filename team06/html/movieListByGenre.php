@@ -95,7 +95,7 @@
                         <div class="genreIcon"></div>
                         <?php
                         $genre=$_SESSION['genreValue'];
-                        echo "<span class='genreFeature'> $genre movie<br/> audience ranking</span>";
+                        echo "<span class='genreFeature'> $genre 장르 영화<br/> audience ranking</span>";
                         ?>
                     </div>
                 </div>

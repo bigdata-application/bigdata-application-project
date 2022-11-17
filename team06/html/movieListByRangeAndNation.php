@@ -116,7 +116,7 @@
                             else 'etc' end as nation_col,
                             case mv_info.genre
                             when '드라마' then '드라마'
-                            when  '로맨스' then '로맨스'
+                            when  '멜로/로맨스' then '멜로/로맨스'
                             when '액션' then '액션'
                             when '애니메이션' then '애니메이션'
                             else 'etc' end as genre_col, 
@@ -162,7 +162,7 @@
                             else 'etc' end as nationc,
                             case mv_info.genre
                             when '드라마' then '드라마'
-                            when  '로맨스' then '로맨스'
+                            when  '멜로/로맨스' then '멜로/로맨스'
                             when '액션' then '액션'
                             when '애니메이션' then '애니메이션'
                             else 'etc' end as genrec, 
@@ -181,7 +181,7 @@
                             mv_info.nation,
                             case mv_info.genre
                             when '드라마' then '드라마'
-                            when  '로맨스' then '로맨스'
+                            when  '멜로/로맨스' then '멜로/로맨스'
                             when '액션' then '액션'
                             when '애니메이션' then '애니메이션'
                             else 'etc' end as genre, 

@@ -150,7 +150,7 @@
                     ?>
                                     <?php //drill down
                     $mysqli = mysqli_connect("localhost", "team06", "team06", "team06");
-                    $isEtc = $_GET['genreNation'];
+                    $isEtc = $_SESSION['genreNation'];
                     if(mysqli_connect_error()){
                       printf("Conncet failed: %s\n", mysqli_connect_error());
                       exit();

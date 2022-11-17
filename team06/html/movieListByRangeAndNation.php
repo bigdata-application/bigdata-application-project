@@ -12,7 +12,7 @@
         session_start();
         $passRange = $_SESSION['rangeValue'];
         if(!isset($_GET['nationValue'])){
-            echo  "<script>alert('please select nation'); document.location.href='http://localhost/team06/html/movieListByRange.php?audRange=$passRange'; </script>";
+            echo  "<script>alert('please select nation'); document.location.href='./movieListByRange.php?audRange=$passRange'; </script>";
         }
         if(isset($_GET['nationValue'])){
         $rangeOption= $passRange; 
